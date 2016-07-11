@@ -31,11 +31,12 @@ $(document).ready(function () {
 
 /* lgin-user-01 */
 function eValidate() {
-    if($("#email").val() != "" && $("#email").val() != undefined){
-      $(".signin").toggle();
-      custTitle();
-      }else
-      alert("Please enter your email address.");
+  if($("#email").val() == "" || $("#email").val() == undefined){
+    alert("Please enter your email address.");
+    custTitle();
+  }else{
+  $(".signin").toggle();
+  } 
 }
 
 /* lgin-pswd-01 */
