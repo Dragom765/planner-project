@@ -2,7 +2,10 @@ var mysql           = require("mysql");
 var express         = require("express");
 var app             = express();
 var bodyParser      = require('body-parser');
+
+/* rest-conn, rest-chek */
 var con             = require("./app/mysql/connect.js");
+/* end */
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -25,6 +28,7 @@ router.use(function(req, res, next) {
 	next(); // make sure we go to the next routes and don't stop here
 });
 
+/* nswb-conn */
 // test route to make sure everything is working (accessed at GET http://localhost:6143/api)
 router.get("/", function(req, res) {
 	res.sendFile(__dirname+"/app/webpage/homepage.html");
@@ -37,6 +41,7 @@ router.get("/format.css", function(req, res) {
 router.get("/main.js", function(req, res) {
   res.sendFile(__dirname+"/app/webpage/main.js");
 });
+/* end */
 
 app.use("/api", router);
 

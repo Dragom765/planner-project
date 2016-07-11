@@ -1,11 +1,13 @@
 var mysql = require("mysql");
 
+/* rest-conn */
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "Dragom765"
 });
 
+/* rest-chek */
 con.query("CREATE DATABASE IF NOT EXISTS plan", function(err) {
   if (err)
     throw err;
@@ -24,5 +26,6 @@ con.query("CREATE DATABASE IF NOT EXISTS plan", function(err) {
       });
   });
 });
+/* end */
 
 module.exports = con;
