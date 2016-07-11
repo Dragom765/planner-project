@@ -1,0 +1,19 @@
+{
+  "name": "planner-project",
+  "version": "1.0.0",
+  "description": "A week planner that stores user information in a database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dragom765/planner-project.git"
+  },
+  "author": "Ian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dragom765/planner-project/issues"
+  },
+  "homepage": "https://github.com/Dragom765/planner-project#readme"
+}

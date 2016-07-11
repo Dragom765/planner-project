@@ -10,7 +10,7 @@ $(document).ready(function () {
   $("#password").hide();
   $("#sign-up").hide();
   $("#option-help").hide();
-  //$("#week-scheduler").hide();
+  $("#week-scheduler").hide();
   $("#email").val("");
   $("#pswd").val("");
   
@@ -87,6 +87,8 @@ var setDay = function(txt, task) {
     task.weekday = 5;
   }else if(txt == "Saturday"){
     task.weekday = 6;
+  }else if(txt == "Day of the week:"){
+    task.weekday = undefined;
   }else 
     alert("Background error. Unable to set day of the week.");
 }
