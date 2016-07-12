@@ -44,7 +44,7 @@ function eValidate() {
 var pswdValidate = function() {
   var pswd = $("#pswd").val();
   
-  if(pswd != "" && pswd) != undefined){
+  if(pswd != "" && pswd != undefined){
     $(".top").hide();
     $("#week-scheduler").show();
   } else {
