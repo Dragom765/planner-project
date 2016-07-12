@@ -31,39 +31,45 @@ $(document).ready(function () {
 
 /* lgin-user-01 */
 function eValidate() {
-  if($("#email").val() == "" || $("#email").val() == undefined){
+  var email = $("#email");
+  if(email.val() == "" || email.val() == undefined) {
     alert("Please enter your email address.");
-    custTitle();
-  }else{
+    custTitle(email.val() );
+  } else {
   $(".signin").toggle();
   } 
 }
 
 /* lgin-pswd-01 */
 var pswdValidate = function() {
-    if($("#pswd").val() != "" && $("#pswd").val() != undefined){
-      $(".top").hide();
-      $("#week-scheduler").show();
-    }else{
-      alert("Please enter your password.");
-    }
+  var pswd = $("#pswd").val();
+  
+  if(pswd != "" && pswd) != undefined){
+    $(".top").hide();
+    $("#week-scheduler").show();
+  } else {
+    alert("Please enter your password.");
+  }
 }
 
 /* lgin-npwd-01 */
 var signupValidate = function() {
-    if($("#pswd-create").val() == ""){
+  var newPswd = $("#pswd-create").val();
+  var check = $("#confirm").val();
+  
+    if(newPswd == "") {
       alert("Please make sure you have entered a password.");
-    }else if($("#pswd-create").val() != $("#confirm").val()){
+    } else if(newPswd != check) {
       alert("Please make sure your passwords match");
-    }else{
+    } else {
       $(".top").hide();
       $("#week-scheduler").show();  
     }
 }
 
 /* plan-head-01 */
-var custTitle = function() {
-  $("#header").text($("#email").val()+"'s Tasklist");
+var custTitle = function(email) {
+  $("#header").text(email+"'s Tasklist");
 }
 
 /* plan-head-02-03 */
@@ -74,23 +80,23 @@ var helpText = function(task) {
 var setDay = function(txt, task) {
   $("#wkday-select").text(txt+" ").append("<span class=\"caret\"></span>");
   
-  if(txt == "Sunday"){
+  if(txt == "Sunday")
     task.weekday = 7;
-  }else if(txt == "Monday"){
+  else if(txt == "Monday")
     task.weekday = 1;
-  }else if(txt == "Tuesday"){
+  else if(txt == "Tuesday")
     task.weekday = 2;
-  }else if(txt == "Wednesday"){
+  else if(txt == "Wednesday")
     task.weekday = 3;
-  }else if(txt == "Thursday"){
+  else if(txt == "Thursday")
     task.weekday = 4;
-  }else if(txt == "Friday"){
+  else if(txt == "Friday")
     task.weekday = 5;
-  }else if(txt == "Saturday"){
+  else if(txt == "Saturday")
     task.weekday = 6;
-  }else if(txt == "Day of the week:"){
+  else if(txt == "Day of the week:")
     task.weekday = undefined;
-  }else 
+  else 
     alert("Background error. Unable to set day of the week.");
 }
 
