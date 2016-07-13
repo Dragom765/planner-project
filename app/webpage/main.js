@@ -8,7 +8,8 @@ $(document).ready(function () {
   
   var user = {
     email: '',
-    pswd: ''
+    pswd: '',
+    name: ''
   };
   
   
@@ -39,11 +40,12 @@ $(document).ready(function () {
 function eValidate(user) {
   var email = $("#email");
   user.email = email.val();
-  if(user.email == "" || user.email == undefined) {
+  var place = user.email.search("@");
+  if(user.email == "" || user.email == undefined || place <= 0) {
     alert("Please enter your email address.");
-
   } else {
-    custTitle(user.email);
+    user.name = user.email.substring(0,place);
+    custTitle(user.name);
 /* lgin-user-02 */
   $.ajax({
     "method": "POST",
@@ -54,10 +56,12 @@ function eValidate(user) {
       },
   /* -01 */
     "success": function(data) {
-      if(data == 1){
+      if(data == "not email")
+        alert("Please enter a valid email address.");
+      else if(data == 1) {
         $("#username").hide();
         $("#password").show();
-      }else{
+      } else {
         $("#username").hide();
         $("#sign-up").show();
   
@@ -89,7 +93,7 @@ var pswdValidate = function(user) {
         if(data == 1){
           $(".top").hide();
           $("#week-scheduler").show();
-        }else{
+        } else {
           alert("Password incorrect. Please try again.");
         }
       }
@@ -116,11 +120,16 @@ var pswdValidate = function(user) {
       "url": "http://localhost:6143/api/login/create-new/",
       "data": {
         "email": user.email,
-        "pswd": user.pswd
+        "pswd": user.pswd,
+        "name": user.name
         },
       "success": function(data) {
-        $(".top").hide();
-        $("#week-scheduler").show();
+        if(data.message == "Success") {
+          $(".top").hide();
+          $("#week-scheduler").show();
+        } else {
+          alert(data.message);
+        }
       
       }
     });
