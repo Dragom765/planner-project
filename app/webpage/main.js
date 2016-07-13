@@ -4,7 +4,13 @@ $(document).ready(function () {
     title: '',
     description: '',
     weekday: 0
-  }
+  };
+  
+  var user = {
+    email: '',
+    pswd: ''
+  };
+  
   
   //initiation of the webpage's first screen
   $("#password").hide();
@@ -15,13 +21,13 @@ $(document).ready(function () {
   $("#pswd").val("");
   
 /* lgin-user-01, plan-head-01 */
-  $("#log-email").click(eValidate);
+  $("#log-email").click(function() { eValidate(user); });
   
 /* lgin-pswd-01 */
-  $("#log-pswd").click(pswdValidate);
+  $("#log-pswd").click(function() { pswdValidate(user); });
   
 /* lgin-npwd-01 */
-  $("#log-create").click(signupValidate);
+  $("#log-create").click(function() { signupValidate(user); });
   
 /* plan-head-02-03 */
   $("#help").click(helpText);
@@ -30,41 +36,95 @@ $(document).ready(function () {
 });
 
 /* lgin-user-01 */
-function eValidate() {
+function eValidate(user) {
   var email = $("#email");
-  if(email.val() == "" || email.val() == undefined) {
+  user.email = email.val();
+  if(user.email == "" || user.email == undefined) {
     alert("Please enter your email address.");
-    custTitle(email.val() );
+
   } else {
-  $(".signin").toggle();
+    custTitle(user.email);
+/* lgin-user-02 */
+  $.ajax({
+    "method": "POST",
+    "crossDomain": true,
+    "url": "http://localhost:6143/api/login/user/",
+    "data": {
+      "email": user.email
+      },
+  /* -01 */
+    "success": function(data) {
+      if(data == 1){
+        $("#username").hide();
+        $("#password").show();
+      }else{
+        $("#username").hide();
+        $("#sign-up").show();
+  
+      }
+    }
+  });
   } 
 }
 
 /* lgin-pswd-01 */
-var pswdValidate = function() {
+var pswdValidate = function(user) {
   var pswd = $("#pswd").val();
   
-  if(pswd != "" && pswd != undefined){
-    $(".top").hide();
-    $("#week-scheduler").show();
-  } else {
+  if(pswd == "" && pswd == undefined){
     alert("Please enter your password.");
+  } else {
+/* lgin-pswd-02 */
+    user.pswd = sjcl.hash.sha256.hash(pswd).toString();
+    
+    $.ajax({
+      "method": "POST",
+      "crossDomain": true,
+      "url": "http://localhost:6143/api/login/pswd/",
+      "data": {
+        "email": user.email,
+        "pswd": user.pswd
+        },
+      "success": function(data) {
+        if(data == 1){
+          $(".top").hide();
+          $("#week-scheduler").show();
+        }else{
+          alert("Password incorrect. Please try again.");
+        }
+      }
+    });
   }
 }
 
 /* lgin-npwd-01 */
-var signupValidate = function() {
+  var signupValidate = function(user) {
   var newPswd = $("#pswd-create").val();
   var check = $("#confirm").val();
   
-    if(newPswd == "") {
-      alert("Please make sure you have entered a password.");
-    } else if(newPswd != check) {
-      alert("Please make sure your passwords match");
-    } else {
-      $(".top").hide();
-      $("#week-scheduler").show();  
-    }
+  if(newPswd == "") {
+    alert("Please make sure you have entered a password.");
+  } else if(newPswd != check) {
+    alert("Please make sure your passwords match");
+  } else {
+    user.pswd = sjcl.hash.sha256.hash(newPswd).toString();
+    
+/* lgin-npwd-02 */
+    $.ajax({
+      "method": "POST",
+      "crossDomain": true,
+      "url": "http://localhost:6143/api/login/create-new/",
+      "data": {
+        "email": user.email,
+        "pswd": user.pswd
+        },
+      "success": function(data) {
+        $(".top").hide();
+        $("#week-scheduler").show();
+      
+      }
+    });
+  }
 }
 
 /* plan-head-01 */

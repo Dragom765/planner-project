@@ -2,6 +2,9 @@ var mysql           = require("mysql");
 var express         = require("express");
 var app             = express();
 var bodyParser      = require('body-parser');
+var crypto          = require("crypto");
+var gets            = require("./app/mysql/get.js");
+var posts           = require("./app/mysql/post.js");
 
 /* rest-conn, rest-chek */
 var con             = require("./app/mysql/connect.js");
@@ -41,6 +44,28 @@ router.get("/format.css", function(req, res) {
 router.get("/main.js", function(req, res) {
   res.sendFile(__dirname+"/app/webpage/main.js");
 });
+
+/* lgin-user-02 */
+router.route("/login/user")
+
+  .post(function(req, res) {
+    posts.checkUser(res, req, con);
+  });
+
+/* lgin-pswd-02-01, lgin-pswd-02-02 */
+router.route("/login/pswd/")
+
+  .post(function(req, res) {
+    
+    posts.checkPswd(res, req, con, crypto);
+  });
+
+/* lgin-npwd-02-01, lgin-npwd-02-02 */
+router.route("/login/create-new/")
+  
+  .post(function(req, res) {
+    posts.makeUser(res, req, con, crypto);
+  });
 /* end */
 
 app.use("/api", router);
