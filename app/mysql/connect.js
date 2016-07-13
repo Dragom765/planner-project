@@ -1,10 +1,11 @@
 var mysql = require("mysql");
+require("dotenv").config({path: "C:/Users/Ian/Documents/Github/planner-project/mydb.env"});
 
 /* rest-conn */
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Dragom765"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS
 });
 
 /* rest-chek */
