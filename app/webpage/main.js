@@ -138,7 +138,7 @@ var pswdValidate = function(user) {
 
 /* plan-head-01 */
 var custTitle = function(email) {
-  $("#header").text(email+"'s Tasklist");
+  $("#header").text(email+"'s Task list");
 }
 
 /* plan-head-02-03 */
