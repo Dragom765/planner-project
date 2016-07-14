@@ -24,7 +24,7 @@ var port = process.env.PORT || 6143;                     // set our port
 
 var router = express.Router();              // get an instance of the express Router
 
-// middleware to use for all requests
+// middleware to use for all requests ------------------------------------------
 router.use(function(req, res, next) {
     // do logging
 	console.log('Something is happening.');
@@ -32,7 +32,7 @@ router.use(function(req, res, next) {
 });
 
 /* nswb-conn */
-// test route to make sure everything is working (accessed at GET http://localhost:6143/api)
+// accessing the webpage (GET http://localhost:6143/api) -----------------------
 router.get("/", function(req, res) {
 	res.sendFile(__dirname+"/app/webpage/homepage.html");
 });
@@ -46,14 +46,15 @@ router.get("/main.js", function(req, res) {
 });
 
 /* lgin-user-02 */
+// login requests --------------------------------------------------------------
 router.route("/login/user")
 
-  .post(function(req, res) {
+  .post(function(req, res) {  // determening if user exists
     posts.checkUser(res, req, con);
   });
 
 /* lgin-pswd-02-01, lgin-pswd-02-02 */
-router.route("/login/pswd/")
+router.route("/login/pswd/")  // checking existing user's password
 
   .post(function(req, res) {
     
@@ -61,11 +62,12 @@ router.route("/login/pswd/")
   });
 
 /* lgin-npwd-02-01, lgin-npwd-02-02 */
-router.route("/login/create-new/")
+router.route("/login/create-new/") // making a new user
   
   .post(function(req, res) {
     posts.makeUser(res, req, con, crypto);
   });
+// -----------------------------------------------------------------------------
 /* end */
 
 app.use("/api", router);
