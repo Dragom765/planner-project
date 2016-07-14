@@ -1,10 +1,12 @@
 var mysql = require("mysql");
+require("dotenv").config({path: "mydb.env"}); 
+//this searches for a file in mysql_con.js's directory since it's called by it, not its own.
 
 /* rest-conn */
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Dragom765"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS
 });
 
 /* rest-chek */
