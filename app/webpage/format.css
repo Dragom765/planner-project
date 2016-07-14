@@ -1,0 +1,129 @@
+#override-bootstrap div {
+  position: relative;
+  background: none;
+  border: none;
+}
+
+#override-bootstrap .row{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* plan-head-02, plan-tlbr-02 */
+li {
+  cursor: pointer;
+}
+
+/* lgin-user */
+#override-bootstrap .front{
+  background: #99ccff;
+}
+
+/* lgin-user, lgin-pswd, lgin-npwd */
+.user-verify{
+  position: absolute;
+  bottom: 20px;
+  left: 0px;
+}
+
+/* lgin-npwd */
+#override-bootstrap .create{
+  border: 1px solid black;
+  margin: 5px;
+}
+
+/* plan-head */
+#override-bootstrap #title-bar{
+  background: #b3ffb3;
+  border: 2px solid grey;
+}
+
+/* plan-head-01 */
+#header{
+  font-size: 4rem;
+  padding: .50rem;
+}
+
+/* plan-head-02 */
+#override-bootstrap #option-div{
+  height: 6rem;
+  width: 6rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+button#option-btn{
+  background: url(https://cdn1.iconfinder.com/data/icons/seo-13/512/settings-128.png);
+  height: 3rem;
+  width: 3rem;
+  background-size: 100%;
+  position: absolute;
+  bottom: 1rem;
+  left: 2rem;
+}
+
+/* plan-head-02-03 */
+#option-help{
+  margin-top: 5rem;
+}
+
+/* plan-wksl, plan-tlbr */
+#body{
+  height: 80rem;
+}
+
+/* plan-wksl */
+#schedule{
+  display: flex;
+  padding: 1rem;
+  border: 2px solid grey;
+}
+
+.week{
+  height: 100%;
+  flex-grow: 1;
+  flex-basis: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.task{
+  font-size: 1.5rem;
+  border: 1px solid #bdbdbd;
+  flex-grow: 1;
+}
+
+#override-bootstrap .day{
+  font-weight: bold;
+  font-size: 2.5rem;
+  border: 2px solid #686868;
+}
+
+#override-bootstrap .task{
+  border: 1px solid lightgrey;
+}
+
+/* plan-tlbr */
+#override-bootstrap #tool-bar{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #b3f0ff;
+  border: 2px solid grey;
+}
+
+/* plan-tlbr-02 */
+.wkday-menu{
+  padding: 0;
+  background: #fafafa;
+}
+
+.wkday{
+  border: 1px solid #e9e9e9;
+}
+
+/* plan-tlbr-03 */
+#tool-buttons{
+  padding-top: 3rem;
+}

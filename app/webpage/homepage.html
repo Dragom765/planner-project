@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>To-Do Weekly List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="http://getbootstrap.com.vn/examples/equal-height-columns/equal-height-columns.css" />
+    <link href="format.css" rel="stylesheet" type="text/css" />
+    <script src="main.js"></script>
+  </head>
+  <body id="override-bootstrap">
+<!-- lgin -->
+    <div class="top container-fluid" id="login">
+    
+<!-- lgin-user -->
+      <div class="row row-eq-height signin" id="username">
+        <div class="col-md-2 col-md-offset-5 front">  
+          <h3>Email:</h3>
+          <div class="level-3 input">
+            <input type="text" id="email" value="" size=35>
+          </div>
+        </div>
+        <div class="col-md-1 front">
+          <button class="user-verify" id="log-email">Next</button> 
+        </div>
+      </div>
+      
+<!-- lgin-pswd -->
+      <div class="row row-eq-height signin" id="password">
+        <div class="col-md-2 col-md-offset-5 front">  
+          <h3>Password:</h3>
+          <div class="level-3 input">
+            <input type="password" id="pswd" value="" size=35>
+          </div>
+        </div>
+        <div class="col-md-1 front">
+          <button class="user-verify" id="log-pswd">Login</button> 
+        </div>
+      </div>
+      
+<!-- lgin-npwd -->
+      <div class="row row-eq-height signin" id="sign-up">
+        <div class="col-md-3 col-md-offset-5 front">
+          <h3>Create Password:</h3>
+          <div class="row row-eq-height create">
+            <div class="col-md-9">
+              <h4>Enter Password:</h4>
+              <div class="level-3 input">
+                <input type="password" id="pswd-create" value="" size=35>
+              </div>
+              <h4>Confirm Password:</h4>
+              <div class="level-3 input">
+                <input type="password" id="confirm" value="" size=35>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <button class="user-verify" id="log-create">Sign Up</button> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!-- plan -->
+    <div class="container-fluid" id="week-scheduler">
+    
+<!-- plan-head -->
+      <div class="row row-eq-height" id="title-bar">
+        <div class="col-md-8 col-md-offset-2">
+<!-- plan-head-01 -->
+          <h1 id="header">[user]'s Tasklist</h1>
+        </div>
+<!-- plan-head-02 -->
+        <div class="col-md-2">
+          <div class="dropdown" id="option-div">
+            <button id="option-btn" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></button>
+            <ul class="dropdown-menu">
+              <li id="pswd-change"><p>Change your password</p></li>
+              <li id="end-user"><p>Delete your account</p></li>
+              <li class="divider"></li>
+              <li id="help"><p>Help</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+     
+<!-- plan-wksl, plan-tlbr -->
+      <div class="row row-eq-height" id="body">
+<!-- plan-wksl -->
+        <div class="col-md-9" id="schedule">
+        
+          <div class="week weekend Sunday">
+            <div class="day">Sunday</div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+          </div>
+          
+          <div class="week weekday Monday">
+            <div class="day">Monday</div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+          </div>
+          
+          <div class="week weekday Tuesday">
+            <div class="day">Tuesday</div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+          </div>
+          
+          <div class="week weekday Wednesday">
+            <div class="day">Wednesday</div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+          </div>
+          
+          <div class="week weekday Thursday">
+            <div class="day">Thursday</div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+          </div>
+          
+          <div class="week weekday Friday">
+            <div class="day">Friday</div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+          </div>
+          
+          <div class="week weekend Saturday">
+            <div class="day">Saturday</div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+            <div class="task">
+            </div>
+          </div>
+        </div>
+        
+<!-- plan-tlbr -->
+        <div class="col-md-3" id="tool-bar">
+          <div>
+<!-- plan-tlbr-01 -->
+            <h4>Title:</h4>
+            <input type="text" size=35 placeholder="Name of the task..." id="title">
+          </div>
+          
+          <div>
+            <h4>Description:</h4>
+            <textarea rows=4 cols=55 placeholder="Details about the task...." id="description"></textarea>
+          </div>
+          
+<!-- plan-tlbr-02 -->
+          <div>
+            <div >
+              <button class="btn btn-primary dropdown-toggle div-caret" type="button" data-toggle="dropdown"><h5 id="wkday-select">Day of the week:<span class="caret"></span></h5></button>
+              <ul class="dropdown-menu wkday-menu">
+                <li class="wkday">Day of the week:</li>
+                <li class="wkday">Sunday</li>
+                <li class="wkday">Monday</li>
+                <li class="wkday">Tuesday</li>
+                <li class="wkday">Wednesday</li>
+                <li class="wkday">Thursday</li>
+                <li class="wkday">Friday</li>
+                <li class="wkday">Saturday</li>
+              </ul>
+            </div>
+          </div>
+          
+<!-- plan-tlbr-03 -->
+          <div id="tool-buttons">
+            <button id="task-add">Add</button>
+            <button id="task-delete">Delete</button>
+          </div>
+          
+<!-- plan-head-02-03 -->
+          <div id="option-help">
+          <p><b>Clicking:</b><br/>Click on a task title to see the title and description pop up in this side bar. You can then update or delete the event.</p>
+          <p><b>Add an event:</b><br/>Fill out the title and description fields, and then choose a day of the week from the dropdown 
+          menu underneath before pressing the add button.<br/>You should then see the event clearly in your schedule.</p>
+          <p><b>Other options:</b><br/>To delete your account or change your password, you will find the appropriate selections available in the same options
+          menu that you found this help message in.</p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
