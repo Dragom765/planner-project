@@ -42,6 +42,7 @@ function eValidate(user) {
   user.email = email.val();
   var place = user.email.search("@");
   if(user.email == "" || user.email == undefined || place <= 0) {
+// .search() throws -1 if not found, this makes sure '@' isn't missing or first.
     alert("Please enter your email address.");
   } else {
     user.name = user.email.substring(0,place);
