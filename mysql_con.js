@@ -1,7 +1,7 @@
 var mysql           = require("mysql");
 var express         = require("express");
 var app             = express();
-var bodyParser      = require('body-parser');
+var bodyParser      = require("body-parser");
 
 /* rest-conn, rest-chek */
 var con             = require("./app/mysql/connect.js");
