@@ -49,12 +49,9 @@ function eValidate(user) {
     custTitle(user.name);
 /* lgin-user-02 */
   $.ajax({
-    "method": "POST",
+    "method": "GET",
     "crossDomain": true,
-    "url": "http://localhost:6143/api/login/user/",
-    "data": {
-      "email": user.email
-      },
+    "url": "http://localhost:6143/api/login/user/"+user.email,
   /* -01 */
     "success": function(data) {
       if(data == "not email")
@@ -83,13 +80,9 @@ var pswdValidate = function(user) {
     user.pswd = sjcl.hash.sha256.hash(pswd).toString();
     
     $.ajax({
-      "method": "POST",
+      "method": "GET",
       "crossDomain": true,
-      "url": "http://localhost:6143/api/login/pswd/",
-      "data": {
-        "email": user.email,
-        "pswd": user.pswd
-        },
+      "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
       "success": function(data) {
         if(data == 1){
           $(".top").hide();
@@ -103,7 +96,7 @@ var pswdValidate = function(user) {
 }
 
 /* lgin-npwd-01 */
-  var signupValidate = function(user) {
+var signupValidate = function(user) {
   var newPswd = $("#pswd-create").val();
   var check = $("#confirm").val();
   

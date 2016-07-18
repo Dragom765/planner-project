@@ -47,18 +47,18 @@ router.get("/main.js", function(req, res) {
 
 /* lgin-user-02 */
 // login requests --------------------------------------------------------------
-router.route("/login/user")
+router.route("/login/user/:email")
 
-  .post(function(req, res) {  // determening if user exists
-    posts.checkUser(res, req, con);
+  .get(function(req, res) {  // determening if user exists
+    gets.checkUser(res, req, con);
   });
 
 /* lgin-pswd-02-01, lgin-pswd-02-02 */
-router.route("/login/pswd/")  // checking existing user's password
+router.route("/login/pswd/:email&:pswd")  // checking existing user's password
 
-  .post(function(req, res) {
+  .get(function(req, res) {
     
-    posts.checkPswd(res, req, con, crypto);
+    gets.checkPswd(res, req, con, crypto);
   });
 
 /* lgin-npwd-02-01, lgin-npwd-02-02 */
