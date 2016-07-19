@@ -85,6 +85,7 @@ var pswdValidate = function(user) {
       "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
       "success": function(data) {
         if(data == 1){
+          taskMaster.taskBoard.listWeek(user);
           $(".top").hide();
           $("#week-scheduler").show();
         } else {
@@ -111,7 +112,7 @@ var signupValidate = function(user) {
     $.ajax({
       "method": "POST",
       "crossDomain": true,
-      "url": "http://localhost:6143/api/login/create-new/",
+      "url": "http://localhost:6143/api/login/create-new",
       "data": {
         "email": user.email,
         "pswd": user.pswd,
@@ -119,6 +120,7 @@ var signupValidate = function(user) {
         },
       "success": function(data) {
         if(data.message == "Success") {
+          taskMaster.taskBoard.listWeek(user);
           $(".top").hide();
           $("#week-scheduler").show();
         } else {
@@ -138,6 +140,51 @@ var custTitle = function(email) {
 /* plan-head-02-03 */
 var helpText = function(task) {
   $("#option-help").toggle();
+}
+
+taskMaster = {
+  showTask: function(day, title) {
+    $("#"+day).append("<div class=\"task\">"+title+"</div>");
+  },
+  showDay: function(day, wkday, tasks, order) {
+    $("#schedule").append("<div class=\"week "+wkday+"\" id=\""+day+"\">"
+      + "<div class=\"day\">"+day+"</div>"
+      + "</div>");
+    $("#"+day).attr('order', order);
+    $.each(tasks, function(i, task, order) {
+      taskMaster.showTask(day, task.title);
+    });
+  },
+  taskBoard: {
+    listWeek: function(user) {
+      $.ajax({
+        "method": "GET",
+        "crossDomain": true,
+        "url": "http://localhost:6143/api/week",
+        "success": function(week) {
+          $.each(week, function(i, presday) {
+            taskMaster.taskBoard.getDayTasks(user, presday, i);
+          });
+        }
+      });
+    },
+    getDayTasks: function(user, presday, order) {
+      $.ajax({
+        "method": "GET",
+        "crossDomain": true,
+        "url": "http://localhost:6143/api/wkday/tasks/"+user.email+"&"+presday.day,
+        "success": function(daytasks) {
+          var size = daytasks.length;
+          if(size < 10) {
+            for(i = size; i < 10; i++) {
+              daytasks[i] = {id: undefined, title: "", description: ""};
+            }
+          }
+          taskMaster.showDay(presday.day, presday.weekday, daytasks, order);
+        }
+      });
+    }
+  }
 }
 
 var setDay = function(txt, task) {
