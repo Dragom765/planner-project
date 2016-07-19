@@ -21,11 +21,25 @@ con.query("CREATE DATABASE IF NOT EXISTS plan", function(err) {
       + "id int NOT NULL AUTO_INCREMENT,"
       + "email varchar(50) NOT NULL,"
       + "pswd varchar(50) NOT NULL,"
-      + "PRIMARY KEY(id)"
+      + "PRIMARY KEY(id),"
+      + "UNIQUE (email)"
       + ")", function(err) {
         if(err)
           throw err;
       });
+  });
+  
+/* lgin-npwd-02-03 */
+con.query("CREATE TABLE IF NOT EXISTS tasks("
+  + "id int NOT NULL AUTO_INCREMENT,"
+  + "email varchar(50) NOT NULL,"
+  + "day varchar(10) NOT NULL,"
+  + "title varchar(50) NOT NULL,"
+  + "description varchar(255) NULL,"
+  + "PRIMARY KEY(id)"
+  + ")", function(err) {
+    if(err)
+      throw err;
   });
 });
 /* end */
