@@ -144,13 +144,14 @@ var helpText = function(task) {
 
 taskMaster = {
   showTask: function(day, title) {
-    $("#"+day).append("<div class=\"task\">"+title+"</div>");
+    $("."+day).append("<div class=\"task\"><div>"+title+"</div></div>");
   },
   showDay: function(day, wkday, tasks, order) {
     $("#schedule").append("<div class=\"week "+wkday+"\" id=\""+day+"\">"
       + "<div class=\"day\">"+day+"</div>"
+      + "<div class=\"list "+day+"\"></div>"
       + "</div>");
-    $("#"+day).attr('order', order);
+    $("."+day).css('order', order);
     $.each(tasks, function(i, task, order) {
       taskMaster.showTask(day, task.title);
     });

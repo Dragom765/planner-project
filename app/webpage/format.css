@@ -74,7 +74,7 @@ button#option-btn{
 }
 
 /* plan-wksl */
-#schedule{
+#override-bootstrap #schedule{
   display: flex;
   padding: 1rem;
   border: 2px solid grey;
@@ -88,22 +88,29 @@ button#option-btn{
   flex-direction: column;
 }
 
-.task{
-  font-size: 1.5rem;
-  text-align: center;
-  border: 1px solid #bdbdbd;
-  height: 9%;
-  flex-grow: 1;
-}
-
 #override-bootstrap .day{
   font-weight: bold;
   font-size: 2.5rem;
   border: 2px solid #686868;
 }
 
+.list{
+  height: 100%;
+  width: 100%;
+}
+
 #override-bootstrap .task{
-  border: 1px solid lightgrey;
+  text-align: center;
+  display: table;
+  height: 10%;
+  width: 100%;
+  flex-grow: 1;
+  border: 1px solid #bdbdbd;
+}
+
+.task > div{
+  display: table-cell;
+  vertical-align: middle;
 }
 
 /* plan-tlbr */
