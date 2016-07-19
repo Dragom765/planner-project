@@ -41,7 +41,7 @@ li {
 /* plan-head-01 */
 #header{
   font-size: 4rem;
-  padding: .50rem;
+  padding: .45rem;
 }
 
 /* plan-head-02 */
@@ -90,7 +90,9 @@ button#option-btn{
 
 .task{
   font-size: 1.5rem;
+  text-align: center;
   border: 1px solid #bdbdbd;
+  height: 9%;
   flex-grow: 1;
 }
 
