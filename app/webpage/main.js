@@ -151,7 +151,7 @@ taskMaster = {
       + "<div class=\"day\">"+day+"</div>"
       + "<div class=\"list "+day+"\"></div>"
       + "</div>");
-    $("."+day).css('order', order);
+    $("#"+day).css('order', order);
     $.each(tasks, function(i, task, order) {
       taskMaster.showTask(day, task.title);
     });
