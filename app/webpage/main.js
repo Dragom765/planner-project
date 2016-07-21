@@ -18,7 +18,7 @@ $(document).ready(function () {
   $("#sign-up").hide();
   $("#option-help").hide();
   $("#week-scheduler").hide();
-  $("#email").val("");
+  $("#email").val("").select();
   $("#pswd").val("");
   
 /* lgin-user-01, plan-head-01 */
@@ -54,14 +54,17 @@ function eValidate(user) {
     "url": "http://localhost:6143/api/login/user/"+user.email,
   /* -01 */
     "success": function(data) {
-      if(data == "not email")
+      if(data == "not email") {
         alert("Please enter a valid email address.");
-      else if(data == 1) {
+        $("#email").select();
+      } else if(data == 1) {
         $("#username").hide();
         $("#password").show();
+        $("#pswd").select();
       } else {
         $("#username").hide();
         $("#sign-up").show();
+        $("#pswd-create").select();
   
       }
     }
@@ -90,6 +93,7 @@ var pswdValidate = function(user) {
           $("#week-scheduler").show();
         } else {
           alert("Password incorrect. Please try again.");
+          $("#pswd").select();
         }
       }
     });
@@ -103,8 +107,10 @@ var signupValidate = function(user) {
   
   if(newPswd == "") {
     alert("Please make sure you have entered a password.");
+    $("#pswd-create").select();
   } else if(newPswd != check) {
     alert("Please make sure your passwords match");
+    $("#pswd-create").select();
   } else {
     user.pswd = sjcl.hash.sha256.hash(newPswd).toString();
     
@@ -125,6 +131,7 @@ var signupValidate = function(user) {
           $("#week-scheduler").show();
         } else {
           alert(data.message);
+        $("#pswd-create").select();
         }
       
       }
