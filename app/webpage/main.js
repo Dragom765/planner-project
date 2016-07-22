@@ -4,6 +4,10 @@ $(document).ready(function () {
     title: '',
     description: '',
     weekday: 0
+  }
+  
+  var tasks = {
+    increment: 3,
   };
   
   var user = {
@@ -25,15 +29,31 @@ $(document).ready(function () {
   $("#log-email").click(function() { eValidate(user); });
   
 /* lgin-pswd-01 */
-  $("#log-pswd").click(function() { pswdValidate(user); });
+  $("#log-pswd").click(function() { pswdValidate(user, tasks); });
   
 /* lgin-npwd-01 */
-  $("#log-create").click(function() { signupValidate(user); });
+  $("#log-create").click(function() { signupValidate(user, tasks); });
   
 /* plan-head-02-03 */
   $("#help").click(helpText);
   
-  $(".wkday").click(function() { setDay($(this).text(), task); });
+  $(".scroll-up").click(function() {
+    alert("Scrolling up");
+    tasks[day].offset -= tasks.increment;
+    taskMaster.scrollDayTasks($(this).val(), tasks, taskMaster);
+  });
+  $(".scroll-down").click(function() {
+    var day = $(this).val()
+    alert("Scrolling down");
+    tasks[day].offset += tasks.increment;
+    taskMaster.scrollDayTasks(day, tasks, taskMaster);
+  });
+  
+  $(".wkday").click(function() { setDay($(this).text(), tasks); });
+  
+  $("#task-add").click(function() { alert(tasks.Wednesday.offset+"\n"+(tasks.Wednesday.offset+tasks.increment) });
+  
+  
 });
 
 /* lgin-user-01 */
@@ -73,7 +93,7 @@ function eValidate(user) {
 }
 
 /* lgin-pswd-01 */
-var pswdValidate = function(user) {
+var pswdValidate = function(user, tasks) {
   var pswd = $("#pswd").val();
   
   if(pswd == "" && pswd == undefined){
@@ -88,7 +108,7 @@ var pswdValidate = function(user) {
       "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
       "success": function(data) {
         if(data == 1){
-          taskMaster.taskBoard.listWeek(user);
+          taskMaster.taskBoard.listWeek(user, tasks);
           $(".top").hide();
           $("#week-scheduler").show();
         } else {
@@ -101,7 +121,7 @@ var pswdValidate = function(user) {
 }
 
 /* lgin-npwd-01 */
-var signupValidate = function(user) {
+var signupValidate = function(user, tasks) {
   var newPswd = $("#pswd-create").val();
   var check = $("#confirm").val();
   
@@ -126,7 +146,7 @@ var signupValidate = function(user) {
         },
       "success": function(data) {
         if(data.message == "Success") {
-          taskMaster.taskBoard.listWeek(user);
+          taskMaster.taskBoard.listWeek(user, tasks);
           $(".top").hide();
           $("#week-scheduler").show();
         } else {
@@ -150,72 +170,97 @@ var helpText = function(task) {
 }
 
 taskMaster = {
-  showTask: function(day, title) {
-    $("."+day).append("<div class=\"task\"><div>"+title+"</div></div>");
+  fillTask: function(day, title, index) {
+    $("#"+day+"-task"+index).text(title);
   },
-  showDay: function(day, wkday, tasks, order) {
-    $("#schedule").append("<div class=\"week "+wkday+"\" id=\""+day+"\">"
-      + "<div class=\"day\">"+day+"</div>"
-      + "<div class=\"list "+day+"\"></div>"
+  makeTask: function(thisDay, day, index) {
+    thisDay.append("<div class=\"task\"><div id=\""+day+"-task"+index+"\"></div></div>");
+  },
+  scrollDayTasks: function(day, tasks, taskMaster) {
+    for(i=0; i < 10; i++){
+      var index = i+tasks[day].offset;
+      taskMaster.fillTask(day, tasks[day][index].title, index);
+    }
+  
+    setButtons(day, tasks);
+  },
+  makeDay: function(day, wkday, tasks, order) {
+    var schedule = $("#schedule");
+    schedule.append("<div class=\"week "+wkday+"\" id=\""+day+"\">"
+        + "<div class=\"day\">"+day+"</div>"
+        + "<div class=\"list "+day+"\"></div>"
+        + "<div class=\"scroll-div\">"
+          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-up\" id=\"scroll-up-"+day+"\">&#x25B2</button>"
+          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-down\" id=\"scroll-down-"+day+"\">&#x25BC</button>"
+        + "</div>"
       + "</div>");
     $("#"+day).css('order', order);
-    $.each(tasks, function(i, task, order) {
-      taskMaster.showTask(day, task.title);
-    });
+    
+    var thisDay = $("."+day)
+    for(i=0; i < 10; i++){
+      var index = i+tasks[day].offset;
+      taskMaster.makeTask(thisDay, day, index);
+      taskMaster.fillTask(day, tasks[day][index].title, index);
+    }
+    setButtons(day, tasks);
   },
   taskBoard: {
-    listWeek: function(user) {
+    listWeek: function(user, tasks) {
       $.ajax({
         "method": "GET",
         "crossDomain": true,
         "url": "http://localhost:6143/api/week",
         "success": function(week) {
           $.each(week, function(i, presday) {
-            taskMaster.taskBoard.getDayTasks(user, presday, i);
+            taskMaster.taskBoard.getDayTasks(user, tasks, presday, i);
           });
         }
       });
     },
-    getDayTasks: function(user, presday, order) {
+    getDayTasks: function(user, tasks, presday, order) {
       $.ajax({
         "method": "GET",
         "crossDomain": true,
         "url": "http://localhost:6143/api/wkday/tasks/"+user.email+"&"+presday.day,
         "success": function(daytasks) {
           var size = daytasks.length;
-          if(size < 10) {
-            for(i = size; i < 10; i++) {
+          if(size % 10 || size == 0) {
+            var cap = (Math.floor(size / 10) + 1) * 10;
+            for(i = size; i < cap; i++) {
               daytasks[i] = {id: undefined, title: "", description: ""};
             }
           }
-          taskMaster.showDay(presday.day, presday.weekday, daytasks, order);
+          tasks[presday.day] = daytasks;
+          tasks[presday.day].offset = 0;
+          taskMaster.makeDay(presday.day, presday.weekday, tasks, order);
         }
       });
     }
   }
 }
 
-var setDay = function(txt, task) {
-  $("#wkday-select").text(txt+" ").append("<span class=\"caret\"></span>");
+var setButtons = function(day, tasks) {
+  var down = $("#scroll-down-"+day);
+  var up = $("#scroll-up-"+day);
   
-  if(txt == "Sunday")
-    task.weekday = 7;
-  else if(txt == "Monday")
-    task.weekday = 1;
-  else if(txt == "Tuesday")
-    task.weekday = 2;
-  else if(txt == "Wednesday")
-    task.weekday = 3;
-  else if(txt == "Thursday")
-    task.weekday = 4;
-  else if(txt == "Friday")
-    task.weekday = 5;
-  else if(txt == "Saturday")
-    task.weekday = 6;
-  else if(txt == "Day of the week:")
+  if(tasks[day].length <= 11+tasks[day].offset)
+    down.prop("disabled", true);
+  else
+    down.prop("disabled", false);
+  
+  if(tasks[day].offset == 0)
+    up.prop("disabled", true);
+  else
+    up.prop("disabled", false);
+}
+
+var setDay = function(txt, tasks) {
+  $("#wkday-select").text(txt).append("<span class=\"caret\"></span>");
+  
+  if(txt == "Day of the week:")
     task.weekday = undefined;
   else 
-    alert("Background error. Unable to set day of the week.");
+    tasks.weekday = txt;
 }
 
 

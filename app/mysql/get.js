@@ -13,7 +13,7 @@ module.exports = {
     var email = req.params.email;
     var day = req.params.day;
     
-    con.query("SELECT id, title, description FROM tasks WHERE email = ? AND day = ? LIMIT 10;", [email, day], function(err, taskDay) {
+    con.query("SELECT id, title, description FROM tasks WHERE email = ? AND day = ?;", [email, day], function(err, taskDay) {
       if(err)
         res.send(err.message);
       
