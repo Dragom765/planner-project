@@ -51,7 +51,7 @@ $(document).ready(function () {
   
   $(".wkday").click(function() { setDay($(this).text(), tasks); });
   
-  $("#task-add").click(function() { alert(tasks.Wednesday.offset+"\n"+(tasks.Wednesday.offset+tasks.increment) });
+  $("#task-add").click(function() { alert(tasks.Wednesday.offset+"\n"+(tasks.Wednesday.offset+tasks.increment)) });
   
   
 });
@@ -190,8 +190,8 @@ taskMaster = {
         + "<div class=\"day\">"+day+"</div>"
         + "<div class=\"list "+day+"\"></div>"
         + "<div class=\"scroll-div\">"
-          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-up\" id=\"scroll-up-"+day+"\">&#x25B2</button>"
-          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-down\" id=\"scroll-down-"+day+"\">&#x25BC</button>"
+          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-up btn btn-secondary btn-sm\" id=\"scroll-up-"+day+"\">&#x25B2</button>"
+          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-down btn btn-secondary btn-sm\" id=\"scroll-down-"+day+"\">&#x25BC</button>"
         + "</div>"
       + "</div>");
     $("#"+day).css('order', order);
