@@ -44,6 +44,7 @@ router.get("/format.css", function(req, res) {
 router.get("/main.js", function(req, res) {
   res.sendFile(__dirname+"/app/webpage/main.js");
 });
+
 /* lgin-user-02 */
 // login requests --------------------------------------------------------------
 router.route("/login/user/:email")
@@ -65,7 +66,8 @@ router.route("/login/create-new") // making a new user
   .post(function(req, res) {
     posts.makeUser(res, req, con, crypto);
   });
-/* end */
+  
+/* plan-wksl-01 */
 // tasks setup -----------------------------------------------------------------
 router.route("/week")
 
@@ -79,6 +81,7 @@ router.route("/wkday/tasks/:email&:day")
   })
 
 // -----------------------------------------------------------------------------
+/* end */
 
 app.use("/api", router);
 

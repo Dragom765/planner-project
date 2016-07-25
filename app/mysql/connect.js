@@ -28,7 +28,7 @@ con.query("CREATE DATABASE IF NOT EXISTS plan;", function(err) {
           throw err;
       });
       
-        /* lgin-npwd-02-03 */
+/* rest-tabl */
     con.query("CREATE TABLE IF NOT EXISTS tasks("
       + "id int NOT NULL AUTO_INCREMENT,"
       + "email varchar(50) NOT NULL,"
