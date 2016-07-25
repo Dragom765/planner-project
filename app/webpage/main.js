@@ -37,22 +37,26 @@ $(document).ready(function () {
 /* plan-head-02-03 */
   $("#help").click(helpText);
   
-  $(".scroll-up").click(function() {
-    alert("Scrolling up");
-    tasks[day].offset -= tasks.increment;
-    taskMaster.scrollDayTasks($(this).val(), tasks, taskMaster);
+  $("#schedule").on("click", "button.scroll-up", function() {
+    var day = $(this).val();
+    var check = tasks[day].offset - tasks.increment;
+    if(check >= 0) 
+      tasks[day].offset -= tasks.increment;
+      tasks[day].offset = 0;
+    
+    taskMaster.scrollDayTasks(day, tasks);
   });
-  $(".scroll-down").click(function() {
-    var day = $(this).val()
-    alert("Scrolling down");
-    tasks[day].offset += tasks.increment;
-    taskMaster.scrollDayTasks(day, tasks, taskMaster);
+  $("#schedule").on("click", "button.scroll-down", function() {
+    var day = $(this).val();
+    var check = 10 + tasks[day].offset + tasks.increment;
+    if(tasks[day].length >= check) 
+      tasks[day].offset += tasks.increment;
+      tasks[day].offset = tasks[day].length - 10;
+    
+    taskMaster.scrollDayTasks(day, tasks);
   });
   
   $(".wkday").click(function() { setDay($(this).text(), tasks); });
-  
-  $("#task-add").click(function() { alert(tasks.Wednesday.offset+"\n"+(tasks.Wednesday.offset+tasks.increment)) });
-  
   
 });
 
@@ -170,40 +174,6 @@ var helpText = function(task) {
 }
 
 taskMaster = {
-  fillTask: function(day, title, index) {
-    $("#"+day+"-task"+index).text(title);
-  },
-  makeTask: function(thisDay, day, index) {
-    thisDay.append("<div class=\"task\"><div id=\""+day+"-task"+index+"\"></div></div>");
-  },
-  scrollDayTasks: function(day, tasks, taskMaster) {
-    for(i=0; i < 10; i++){
-      var index = i+tasks[day].offset;
-      taskMaster.fillTask(day, tasks[day][index].title, index);
-    }
-  
-    setButtons(day, tasks);
-  },
-  makeDay: function(day, wkday, tasks, order) {
-    var schedule = $("#schedule");
-    schedule.append("<div class=\"week "+wkday+"\" id=\""+day+"\">"
-        + "<div class=\"day\">"+day+"</div>"
-        + "<div class=\"list "+day+"\"></div>"
-        + "<div class=\"scroll-div\">"
-          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-up btn btn-secondary btn-sm\" id=\"scroll-up-"+day+"\">&#x25B2</button>"
-          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-down btn btn-secondary btn-sm\" id=\"scroll-down-"+day+"\">&#x25BC</button>"
-        + "</div>"
-      + "</div>");
-    $("#"+day).css('order', order);
-    
-    var thisDay = $("."+day)
-    for(i=0; i < 10; i++){
-      var index = i+tasks[day].offset;
-      taskMaster.makeTask(thisDay, day, index);
-      taskMaster.fillTask(day, tasks[day][index].title, index);
-    }
-    setButtons(day, tasks);
-  },
   taskBoard: {
     listWeek: function(user, tasks) {
       $.ajax({
@@ -236,6 +206,41 @@ taskMaster = {
         }
       });
     }
+  },
+  makeDay: function(day, wkday, tasks, order) {
+    var schedule = $("#schedule");
+    schedule.append("<div class=\"week "+wkday+"\" id=\""+day+"\">"
+        + "<div class=\"day\">"+day+"</div>"
+        + "<div class=\"list "+day+"\"></div>"
+        + "<div class=\"scroll-div\">"
+          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-up btn btn-secondary btn-sm\" id=\"scroll-up-"+day+"\">&#x25B2</button>"
+          + "<button type=\"button\" value=\""+day+"\" class=\"scroll-down btn btn-secondary btn-sm\" id=\"scroll-down-"+day+"\">&#x25BC</button>"
+        + "</div>"
+      + "</div>");
+    $("#"+day).css('order', order);
+    
+    var thisDay = $("."+day)
+    for(i=0; i < 10; i++) {
+      var index = i+tasks[day].offset;
+      taskMaster.makeTask(thisDay, day, index);
+      taskMaster.fillTask(day, tasks[day][index].title, index);
+    }
+    setButtons(day, tasks);
+  },
+  makeTask: function(thisDay, day, index) {
+    thisDay.append("<div class=\"task\"><div id=\""+day+"-task"+index+"\"></div></div>");
+  },
+  scrollDayTasks: function(day, tasks) {
+    var index;
+    for(i=0; i < 10; i++) {
+      index = i+tasks[day].offset;
+      taskMaster.fillTask(day, tasks[day][index].title, i);
+    }
+  
+    setButtons(day, tasks);
+  },
+  fillTask: function(day, title, index) {
+    $("#"+day+"-task"+index).text(title);
   }
 }
 
@@ -243,7 +248,7 @@ var setButtons = function(day, tasks) {
   var down = $("#scroll-down-"+day);
   var up = $("#scroll-up-"+day);
   
-  if(tasks[day].length <= 11+tasks[day].offset)
+  if(tasks[day].length == 10+tasks[day].offset)
     down.prop("disabled", true);
   else
     down.prop("disabled", false);
