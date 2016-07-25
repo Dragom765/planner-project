@@ -38,10 +38,30 @@ $(document).ready(function () {
   $("#help").click(helpText);
 
 /* plan-wksl-01-03 */
-  $("#schedule").on("click", "button.scroll-up", scrollUp);
+  $("#schedule").on("click", "button.scroll-up", function() {
+    var day = $(this).val();
+    var check = tasks[day].offset - tasks.increment;
+    
+    if(check >= 0) 
+      tasks[day].offset -= tasks.increment;
+    else if(tasks[day].offset != 0)
+      tasks[day].offset = 0;
+    
+    taskMaster.scrollDayTasks(day, tasks);
+});
   
-  $("#schedule").on("click", "button.scroll-down", scrollDown);
-/* end */
+  $("#schedule").on("click", "button.scroll-down", function() {
+    var day = $(this).val();
+    var check = 10 + tasks[day].offset + tasks.increment;
+    
+    if(tasks[day].length >= check) 
+      tasks[day].offset += tasks.increment;
+    else if(tasks[day].length != tasks[day].offset + 10)
+      tasks[day].offset = tasks[day].length - 10;
+    
+    taskMaster.scrollDayTasks(day, tasks);
+});
+  
   $(".wkday").click(function() { setDay($(this).text(), tasks); });
   
 });
@@ -247,30 +267,6 @@ var setButtons = function(day, tasks) {
     up.prop("disabled", true);
   else
     up.prop("disabled", false);
-}
-
-var scrollUp = function() {
-    var day = $(this).val();
-    var check = tasks[day].offset - tasks.increment;
-    
-    if(check >= 0) 
-      tasks[day].offset -= tasks.increment;
-    else if(tasks[day].offset != 0)
-      tasks[day].offset = 0;
-    
-    taskMaster.scrollDayTasks(day, tasks);
-}
-
-var scrollDown = function() {
-    var day = $(this).val();
-    var check = 10 + tasks[day].offset + tasks.increment;
-    
-    if(tasks[day].length >= check) 
-      tasks[day].offset += tasks.increment;
-    else if(tasks[day].length != tasks[day].offset + 10)
-      tasks[day].offset = tasks[day].length - 10;
-    
-    taskMaster.scrollDayTasks(day, tasks);
 }
 /* end */
 
