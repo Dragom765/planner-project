@@ -42,6 +42,7 @@ $(document).ready(function () {
     var check = tasks[day].offset - tasks.increment;
     if(check >= 0) 
       tasks[day].offset -= tasks.increment;
+    else if(tasks[day].offset != 0)
       tasks[day].offset = 0;
     
     taskMaster.scrollDayTasks(day, tasks);
@@ -51,6 +52,7 @@ $(document).ready(function () {
     var check = 10 + tasks[day].offset + tasks.increment;
     if(tasks[day].length >= check) 
       tasks[day].offset += tasks.increment;
+    else if(tasks[day].length != tasks[day].offset + 10)
       tasks[day].offset = tasks[day].length - 10;
     
     taskMaster.scrollDayTasks(day, tasks);
