@@ -5,6 +5,7 @@ var bodyParser      = require("body-parser");
 var crypto          = require("crypto");
 var gets            = require("./app/mysql/get.js");
 var posts           = require("./app/mysql/post.js");
+var deletes         = require("./app/mysql/delete.js");
 
 /* rest-conn, rest-chek */
 var con             = require("./app/mysql/connect.js");
@@ -79,9 +80,24 @@ router.route("/wkday/tasks/:email&:day")
   .get(function(req, res) {
     gets.getDayTasks(res, req, con);
   })
+/* end */
+
+// task editing ----------------------------------------------------------------
+router.route("/tasks/add")
+
+  .post(function(req, res) {
+    posts.makeTask(res, req, con);
+  });
+  
+router.route("/tasks/delete/:id&:email")
+
+  .delete(function(req, res) {
+    deletes.killTask(res, req, con);
+  });
+
+  
 
 // -----------------------------------------------------------------------------
-/* end */
 
 app.use("/api", router);
 
