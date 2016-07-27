@@ -6,6 +6,7 @@ var crypto          = require("crypto");
 var gets            = require("./app/mysql/get.js");
 var posts           = require("./app/mysql/post.js");
 var deletes         = require("./app/mysql/delete.js");
+var puts            = require("./app/mysql/put.js");
 
 /* rest-conn, rest-chek */
 var con             = require("./app/mysql/connect.js");
@@ -97,7 +98,11 @@ router.route("/tasks/add")
     posts.makeTask(res, req, con);
   });
   
-router.route("/tasks/delete/:id&:email")
+router.route("/tasks/change/:id&:email")
+
+  .put(function(req, res) {
+    puts.updateTask(res, req, con);
+  })
 
   .delete(function(req, res) {
     deletes.killTask(res, req, con);

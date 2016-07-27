@@ -97,7 +97,7 @@ var taskMaster = {
             $.ajax({
               "method": "POST",
               "crossDomain": true,
-              "url": "http://localhost:6143/api/tasks/add/",
+              "url": "http://localhost:6143/api/tasks/add",
               "data": {
                 "email": user.email,
                 "day": task.weekday,
@@ -115,14 +115,40 @@ var taskMaster = {
                   task.title = '';
                   task.description = '';
                   task.weekday = '';
-               
-                  $("#title").val('');
-                  $("#description").val('');
-                  $("#wkday-select").text("Day of the week:").append("<span class=\"caret\"></span>");
-                  task.weekday = '';
                 }
               }
             });
+          }
+        },
+        
+        /* plan-tlbr-03 */ 
+        updateTask: function(task, tasks, user) {
+          var titleBox = $("#title").val();
+          var descBox = $("#description").val();
+          
+          if(task.id == null || task.title == '' || task.weekday == '')
+            alert("Please make sure an existing task is selected, and a title is present");
+          else {
+            if(task.title == titleBox && task.description == descBox)
+              alert("Change the title or the description of the task; you cannot change the weekday of a task as of yet.");
+            else {
+              $.ajax({
+                "method": "PUT",
+                "crossDomain": true,
+                "url": "http://localhost:6143/api/tasks/change/"+task.id+"&"+user.email,
+                "data": {
+                  "title": titleBox,
+                  "description": descBox
+                },
+                "success": function(data) {
+                  if(data.message != "Task updated")
+                    alert(data.message);
+                  else {
+                    taskMaster.refresh.get.refreshDay(user, tasks, task.weekday);
+                  }
+                }
+              });
+            }
           }
         },
         
@@ -132,7 +158,7 @@ var taskMaster = {
           var descBox = $("#description").val();
           var wkdaySelect = $("#wkday-select").text();
   
-          if(task.id == null || task.title == '' || task.description == '' || task.weekday == '')
+          if(task.id == null || task.title == '' || task.weekday == '')
             alert("Please select a task before deletion");
           else {
             if(task.title != titleBox || task.description != descBox || task.weekday != wkdaySelect)
@@ -141,7 +167,7 @@ var taskMaster = {
               $.ajax({
                 "method": "DELETE",
                 "crossDomain": true,
-                "url": "http://localhost:6143/api/tasks/delete/"+task.id+"&"+user.email,
+                "url": "http://localhost:6143/api/tasks/change/"+task.id+"&"+user.email,
                 "success": function(data) {
                   if(data.message != "Task deleted")
                     alert(data.message+" yoo-hoo");
@@ -157,7 +183,6 @@ var taskMaster = {
                     $("#title").val('');
                     $("#description").val('');
                     $("#wkday-select").text("Day of the week:").append("<span class=\"caret\"></span>");
-                    task.weekday = '';
                   }
                 }
               });

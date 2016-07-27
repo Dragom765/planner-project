@@ -59,7 +59,9 @@ $(document).ready(function () {
   
   $(".wkday").click(function() { setDay($(this).text(), task); });
   
-  $("#task-add").click(function() { taskMaster.refresh.get.change.createTask(tasks, task, user, taskMaster); });
+  $("#task-add").click(function() { taskMaster.refresh.get.change.createTask(tasks, task, user); });
+  
+  $("#task-update").click(function() { taskMaster.refresh.get.change.updateTask(task, tasks, user); });
   
   $("#task-delete").click(function() { taskMaster.refresh.get.change.killTask(task, tasks, user); });
   
