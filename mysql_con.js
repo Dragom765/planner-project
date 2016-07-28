@@ -5,6 +5,8 @@ var bodyParser      = require("body-parser");
 var crypto          = require("crypto");
 var gets            = require("./app/mysql/get.js");
 var posts           = require("./app/mysql/post.js");
+var deletes         = require("./app/mysql/delete.js");
+var puts            = require("./app/mysql/put.js");
 
 /* rest-conn, rest-chek */
 var con             = require("./app/mysql/connect.js");
@@ -39,6 +41,14 @@ router.get("/", function(req, res) {
 
 router.get("/format.css", function(req, res) {
   res.sendFile(__dirname+"/app/webpage/format.css");
+});
+
+router.get("/login.js", function(req, res) {
+  res.sendFile(__dirname+"/app/webpage/login.js");
+});
+
+router.get("/tasks.js", function(req, res) {
+  res.sendFile(__dirname+"/app/webpage/tasks.js");
 });
 
 router.get("/main.js", function(req, res) {
@@ -79,6 +89,24 @@ router.route("/wkday/tasks/:email&:day")
   .get(function(req, res) {
     gets.getDayTasks(res, req, con);
   })
+
+/* plan-tlbr-03 */
+// task editing ----------------------------------------------------------------
+router.route("/tasks/add")
+
+  .post(function(req, res) {
+    posts.makeTask(res, req, con);
+  });
+  
+router.route("/tasks/change/:id&:email")
+
+  .put(function(req, res) {
+    puts.updateTask(res, req, con);
+  })
+
+  .delete(function(req, res) {
+    deletes.killTask(res, req, con);
+  });
 
 // -----------------------------------------------------------------------------
 /* end */
