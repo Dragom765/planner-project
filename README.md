@@ -26,4 +26,4 @@
 
 .6 In your web browser, navigate to [http://localhost:6143/api/](http://localhost:6143/api/ "To-Do Weekly List") to access the application.
 
-        *Note:* this application is being designed using Firefox, for it's _Firebug_ tool. Other browsers such as Chrome shouldn't lose functionality, but they may lack the alignment until a specific PR to optimize the display is made.
+ - *Note:* this application is being designed using Firefox, for it's _Firebug_ tool. Other browsers such as Chrome shouldn't lose functionality, but they may lack the alignment until a specific PR to optimize the display is made.
