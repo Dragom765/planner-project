@@ -89,8 +89,8 @@ router.route("/wkday/tasks/:email&:day")
   .get(function(req, res) {
     gets.getDayTasks(res, req, con);
   })
-/* end */
 
+/* plan-tlbr-03 */
 // task editing ----------------------------------------------------------------
 router.route("/tasks/add")
 
@@ -109,6 +109,7 @@ router.route("/tasks/change/:id&:email")
   });
 
 // -----------------------------------------------------------------------------
+/* end */
 
 app.use("/api", router);
 
