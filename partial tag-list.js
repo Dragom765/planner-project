@@ -9,7 +9,7 @@
     * (-01) verify there is something to verify
     * (-02) verify password
       ~ (-01) encrypt password
-    * (-02) verify encryption in db matches
+      ~ (-02) verify encryption in db matches
 
   > (-npwd) create new password
     * (-01) verify both entries match, and aren’t blank
@@ -29,7 +29,10 @@
     * (-03) Week/Weekend/Weekday/Today selection for showing (optional)
 
   > (-wksl) Week Schedule List
-    * (-01) update tasks upon login
+    * (-01) show user tasks
+      ~ (-01) get tasks
+      ~ (-02) display tasks
+      ~ (-03) enable scroll if appropriate
     * (-02) click shows details in toolbar
 
   > (-tlbr) Side toolbar
@@ -48,20 +51,4 @@
 
   > (-conn) connection to correct database
   > (-chek) could have ‘create database if doesn’t exist’ check
-  > (-get) GET capabilities
-    * (-01) get count where ? = ?
-    * (-02) get all tasks for specified user
-
-  > (-post) POST capabilities
-    * (-01) post new user
-      ~ (-01) create table for user tasks
-    * (-02) post new task
-
-  > (-delt) DELETE capabilities
-    * (-01) delete task
-    * (-02) delete user
-      ~ (-01) delete user task table
-
-  > (-uput) PUT (UPDATE) capabilities
-    * (-01) update user password
-    * (-02) update user task
+  > (-tabl) create tables needed if none exist

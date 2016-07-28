@@ -35,13 +35,13 @@ li {
 /* plan-head */
 #override-bootstrap #title-bar{
   background: #b3ffb3;
-  border: 2px solid grey;
+  border: 1px solid grey;
 }
 
 /* plan-head-01 */
 #header{
   font-size: 4rem;
-  padding: .50rem;
+  padding: .45rem;
 }
 
 /* plan-head-02 */
@@ -53,7 +53,7 @@ li {
   left: 0;
 }
 
-button#option-btn{
+#option-btn{
   background: url(https://cdn1.iconfinder.com/data/icons/seo-13/512/settings-128.png);
   height: 3rem;
   width: 3rem;
@@ -74,10 +74,10 @@ button#option-btn{
 }
 
 /* plan-wksl */
-#schedule{
+#override-bootstrap #schedule{
   display: flex;
   padding: 1rem;
-  border: 2px solid grey;
+  border: 1px solid grey;
 }
 
 .week{
@@ -88,20 +88,41 @@ button#option-btn{
   flex-direction: column;
 }
 
-.task{
-  font-size: 1.5rem;
-  border: 1px solid #bdbdbd;
-  flex-grow: 1;
-}
-
 #override-bootstrap .day{
   font-weight: bold;
   font-size: 2.5rem;
   border: 2px solid #686868;
 }
 
+.list{
+  height: 100%;
+  width: 100%;
+}
+
 #override-bootstrap .task{
-  border: 1px solid lightgrey;
+  text-align: center;
+  display: table;
+  height: 10%;
+  width: 100%;
+  flex-grow: 1;
+  border: 1px solid #bdbdbd;
+}
+
+#override-bootstrap .task > div{
+  font: Verdana;
+  font-weight: bolder;
+  font-size: 2rem;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#override-bootstrap .scroll-div{
+  width: 100%;
+}
+
+#override-bootstrap .scroll-up, .scroll-down{
+  height: .25rem;
+  cursor: pointer;
 }
 
 /* plan-tlbr */
@@ -110,7 +131,7 @@ button#option-btn{
   display: flex;
   flex-direction: column;
   background: #b3f0ff;
-  border: 2px solid grey;
+  border: 1px solid grey;
 }
 
 /* plan-tlbr-02 */
@@ -121,6 +142,12 @@ button#option-btn{
 
 .wkday{
   border: 1px solid #e9e9e9;
+}
+
+
+
+#description{
+  resize: none;
 }
 
 /* plan-tlbr-03 */

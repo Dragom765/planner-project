@@ -57,16 +57,29 @@ router.route("/login/user/:email")
 router.route("/login/pswd/:email&:pswd")  // checking existing user's password
 
   .get(function(req, res) {
-    
     gets.checkPswd(res, req, con, crypto);
   });
 
 /* lgin-npwd-02-01, lgin-npwd-02-02 */
-router.route("/login/create-new/") // making a new user
+router.route("/login/create-new") // making a new user
   
   .post(function(req, res) {
     posts.makeUser(res, req, con, crypto);
   });
+  
+/* plan-wksl-01 */
+// tasks setup -----------------------------------------------------------------
+router.route("/week")
+
+  .get(function(req, res) {
+    gets.getWeek(res, req, con);
+  })
+
+router.route("/wkday/tasks/:email&:day")
+  .get(function(req, res) {
+    gets.getDayTasks(res, req, con);
+  })
+
 // -----------------------------------------------------------------------------
 /* end */
 

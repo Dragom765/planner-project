@@ -1,5 +1,28 @@
 module.exports = {
+//made a default week table, just has week day names, and if they're a weekend or weekday
+  getWeek: function(res, req, con) {
+    con.query("SELECT day, weekday FROM week ORDER BY ordr;", function(err, week) {
+      if(err)
+        res.send(err.message);
+      res.json(week);
+      return;
+    });
+  },
 
+  /* rest-get-01 */
+  getDayTasks: function(res, req, con) {
+    var email = req.params.email;
+    var day = req.params.day;
+    
+    con.query("SELECT id, title, description FROM tasks WHERE email = ? AND day = ?;", [email, day], function(err, taskDay) {
+      if(err)
+        res.send(err.message);
+      
+      res.json(taskDay);
+    });
+  },
+  
+  
 /* lgin-user */
   checkUser: function(res, req, con) {
     var email = req.params.email;
