@@ -122,8 +122,6 @@ var changePswd = function(user) {
   var newpswd = sjcl.hash.sha256.hash(new1.val()).toString();
   var check = sjcl.hash.sha256.hash(takeback.val()).toString();
   
-  alert("Old:"+oldpswd+"\nNew:"+newpswd+"\nCheck:"+check+"\n"+old+"\n"+new1+"\n"+takeback);
-  
   if(newpswd == "" || oldpswd == "" || oldpswd == "")
     error.text("Please make sure to fill in all subject fields.")
   else if(newpswd != check)
@@ -145,9 +143,9 @@ var changePswd = function(user) {
           error.text("Something went wrong. Please try again.");
         else {
           error.text("");
-          $("#oldpswd").val("");
-          $("#new-change").val("");
-          $("#newconfirm").val("");
+          old.val("");
+          new1.val("");
+          takeback.val("");
           $("#newpswd").hide();
           $("#tools").show();
         }
