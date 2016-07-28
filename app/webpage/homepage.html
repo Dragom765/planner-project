@@ -96,23 +96,20 @@
         
 <!-- plan-tlbr -->
         <div class="col-md-3" id="tool-bar">
-          <div>
+          <div id="tools">
+            <div>
 <!-- plan-tlbr-01 -->
-            <h4>Title:</h4>
-            <input type="text" size=35 placeholder="Name of the task..." id="title">
-          </div>
-          
-          <div>
-            <h4>Description:</h4>
-            <textarea rows=4 cols=55 placeholder="Details about the task...." id="description"></textarea>
-          </div>
+              <h4>Title:</h4>
+              <input type="text" size=35 placeholder="Name of the task..." id="title">
+            
+              <h4>Description:</h4>
+              <textarea rows=4 cols=55 placeholder="Details about the task...." id="description"></textarea>
+            </div>
           
 <!-- plan-tlbr-02 -->
-          <div>
-            <div >
-              <button class="btn btn-primary dropdown-toggle div-caret" type="button" data-toggle="dropdown"><h5 id="wkday-select">Day of the week:<span class="caret"></span></h5></button>
+            <div>
+              <button class="btn btn-primary dropdown-toggle div-caret" type="button" data-toggle="dropdown"><h5 id="wkday-select">Day of the week: <span class="caret"></span></h5></button>
               <ul class="dropdown-menu wkday-menu">
-                <li class="wkday">Day of the week:</li>
                 <li class="wkday">Sunday</li>
                 <li class="wkday">Monday</li>
                 <li class="wkday">Tuesday</li>
@@ -120,26 +117,47 @@
                 <li class="wkday">Thursday</li>
                 <li class="wkday">Friday</li>
                 <li class="wkday">Saturday</li>
+                <li class="wkday">Day of the week:</li>
               </ul>
             </div>
-          </div>
           
 <!-- plan-tlbr-03 -->
-          <div id="tool-buttons">
-            <button id="task-add">Add</button>
-            <button id="task-update">Update</button>
-            <button id="task-delete">Delete</button>
-          </div>
+            <div id="tool-buttons">
+              <button id="task-add">Add</button>
+              <button id="task-update">Update</button>
+              <button id="task-delete">Delete</button>
+            </div>
           
 <!-- plan-head-02-03 -->
-          <div id="option-help">
-          <p><b>Clicking:</b><br/>Click on a task title to see the title and description pop up in this side bar. You can then update or delete the event.</p>
-          <p><b>Add an event:</b><br/>Fill out the title and description fields, and then choose a day of the week from the dropdown 
-          menu underneath before pressing the add button.<br/>You should then see the event clearly in your schedule.</p>
-          <p><b>Other options:</b><br/>To delete your account or change your password, you will find the appropriate selections available in the same options
-          menu that you found this help message in.</p>
+            <div id="option-help">
+            <p><b>Clicking:</b><br/>Click on a task title to see the title and description pop up in this side bar. You can then update or delete the event.</p>
+            <p><b>Add an event:</b><br/>Fill out the title and description fields, and then choose a day of the week from the dropdown 
+            menu underneath before pressing the add button.<br/>You should then see the event clearly in your schedule.</p>
+            <p><b>Other options:</b><br/>To delete your account or change your password, you will find the appropriate selections available in the same options
+            menu that you found this help message in.</p>
+            </div>
           </div>
-          
+<!-- plan-head-02-01 -->
+          <div id="newpswd">
+            <div id="pswdchange">
+              <h4>Old Password:</h4>
+              <input type="password" size=35 id="oldpswd">
+            
+              <h4>New Password:</h4>
+              <input type="password" size=35 id="new-change">
+            
+              <h4>Confirm Password:</h4>
+              <input type="password" size=35 id="newconfirm">
+            </div>
+            
+            <div id="change-button">
+              <button id="setPassword">Submit</button>
+            </div>
+            
+            <div>
+              <p id="err-pswd-change"></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

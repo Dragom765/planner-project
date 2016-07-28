@@ -47,13 +47,11 @@ var pswdValidate = function(user, tasks) {
       "crossDomain": true,
       "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
       "success": function(data) {
-        if(data == 1) {
-          taskMaster.create.get.start.listWeek(user, tasks);
-          $(".top").hide();
-          $("#week-scheduler").show();
-        } else {
+        if(data != 1) {
           alert("Password incorrect. Please try again.");
           $("#pswd").select();
+        } else {
+          solidifyUser(user);
         }
       }
     });
@@ -85,18 +83,37 @@ var signupValidate = function(user, tasks) {
         "name": user.name
         },
       "success": function(data) {
-        if(data.message == "Success") {
-          taskMaster.create.get.start.listWeek(user, tasks);
-          $(".top").hide();
-          $("#week-scheduler").show();
-        } else {
+        if(data.message != "Success") {
           alert(data.message);
-        $("#pswd-create").select();
+          $("#pswd-create").select();
+        } else {
+          solidifyUser(user);
         }
       
       }
     });
   }
+}
+
+/* plan-head-02-01 & plan-head-02-02 enabler */
+var solidifyUser = function(user) {
+  $.ajax({
+    "method": "GET",
+    "crossDomain": true,
+    "url": "http://localhost:6143/api/solid/"+user.email+"&"+user.pswd,
+    "success": function(data) {
+      if(typeof data != "number") {
+        alert(data+"\nSomething went wrong. Please try again.");
+        $("#pswd-create").select();
+      } else {
+        user.id = data;
+        
+        taskMaster.create.get.start.listWeek(user, tasks);
+        $(".top").hide();
+        $("#week-scheduler").show();
+      }
+    }
+  });
 }
 
 /* plan-head-01 */

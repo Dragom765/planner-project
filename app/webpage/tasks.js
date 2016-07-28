@@ -1,8 +1,8 @@
 /* plan-tlbr-02-01 */
 var setDay = function(txt, task) {
-  $("#wkday-select").text(txt).append("<span class=\"caret\"></span>");
+  $("#wkday-select").text(txt+" ").append("<span class=\"caret\"></span>");
   
-  if(txt == "Day of the week:")
+  if(txt == "Day of the week: ")
     task.weekday = '';
   else 
     task.weekday = txt;

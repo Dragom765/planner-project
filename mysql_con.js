@@ -77,6 +77,12 @@ router.route("/login/create-new") // making a new user
     posts.makeUser(res, req, con, crypto);
   });
   
+router.route("/solid/:email&:pswd")  // checking existing user's password
+
+  .get(function(req, res) {
+    gets.solidUser(res, req, con, crypto);
+  });
+
 /* plan-wksl-01 */
 // tasks setup -----------------------------------------------------------------
 router.route("/week")
@@ -88,9 +94,9 @@ router.route("/week")
 router.route("/wkday/tasks/:email&:day")
   .get(function(req, res) {
     gets.getDayTasks(res, req, con);
-  })
-/* end */
+  });
 
+/* plan-tlbr-03 */
 // task editing ----------------------------------------------------------------
 router.route("/tasks/add")
 
@@ -108,7 +114,13 @@ router.route("/tasks/change/:id&:email")
     deletes.killTask(res, req, con);
   });
 
+/* plan-head-02 */
+// edit profile ----------------------------------------------------------------
+router.route("/user/newpswd")
   
+  .put(function(req, res) {
+    puts.newPswd(res, req, con, crypto);
+  });
 
 // -----------------------------------------------------------------------------
 

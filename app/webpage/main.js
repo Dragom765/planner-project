@@ -14,6 +14,12 @@ $(document).ready(function () {
   
 /* lgin-npwd-01 */
   $("#log-create").click(function() { signupValidate(user, tasks); });
+
+/* plan-head-02-01 */
+  $("#pswd-change").click(pswdChangeOption);
+
+/* plan-head-02-01 */
+  $("#setPassword").click(function() { changePswd(user); });
   
 /* plan-head-02-03 */
   $("#help").click(helpText);
@@ -80,6 +86,7 @@ var initiate = function() {
   };
   
   user = {
+    id: '',
     email: '',
     pswd: '',
     name: ''
@@ -91,10 +98,62 @@ var initiate = function() {
   $("#sign-up").hide();
   $("#option-help").hide();
   $("#week-scheduler").hide();
+  $("#newpswd").hide();
   $("#email").val("").select();
   $("#pswd").val("");
   $("#title").val("");
   $("#description").val("");
+}
+
+/* plan-head-02-01 */
+var pswdChangeOption = function() {
+  $("#tools").hide();
+  $("#newpswd").show();
+}
+
+/* plan-head-02-01 */
+var changePswd = function(user) {
+  var old = $("#oldpswd");
+  var new1 = $("#new-change");
+  var takeback = $("#newconfirm");
+  var error = $("#err-pswd-change");
+  
+  var oldpswd = sjcl.hash.sha256.hash(old.val()).toString();
+  var newpswd = sjcl.hash.sha256.hash(new1.val()).toString();
+  var check = sjcl.hash.sha256.hash(takeback.val()).toString();
+  
+  alert("Old:"+oldpswd+"\nNew:"+newpswd+"\nCheck:"+check+"\n"+old+"\n"+new1+"\n"+takeback);
+  
+  if(newpswd == "" || oldpswd == "" || oldpswd == "")
+    error.text("Please make sure to fill in all subject fields.")
+  else if(newpswd != check)
+    error.text("The new passwords do not match. Please try again.");
+  else if(oldpswd != user.pswd)
+    error.text("Your previous password is incorrect. Please try again.");
+  else {
+    $.ajax({
+      "method": "PUT",
+      "crossDomain": true,
+      "url": "http://localhost:6143/api/user/newpswd/",
+      "data": {
+        "email": user.email,
+        "id": user.id,
+        "newpswd": newpswd
+      },
+      "success": function(data) {
+        if(data.message != "Password updated")
+          error.text("Something went wrong. Please try again.");
+        else {
+          error.text("");
+          $("#oldpswd").val("");
+          $("#new-change").val("");
+          $("#newconfirm").val("");
+          $("#newpswd").hide();
+          $("#tools").show();
+        }
+      }
+    });
+  }
 }
 
 /* plan-head-02-03 */

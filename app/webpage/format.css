@@ -130,10 +130,13 @@ li {
 /* plan-tlbr */
 #override-bootstrap #tool-bar{
   height: 100%;
-  display: flex;
-  flex-direction: column;
   background: #b3f0ff;
   border: 1px solid grey;
+}
+
+#override-bootstrap #tools{
+  display: flex;
+  flex-direction: column;
 }
 
 /* plan-tlbr-02 */
