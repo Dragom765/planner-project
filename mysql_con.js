@@ -108,8 +108,6 @@ router.route("/tasks/change/:id&:email")
     deletes.killTask(res, req, con);
   });
 
-  
-
 // -----------------------------------------------------------------------------
 
 app.use("/api", router);

@@ -67,6 +67,7 @@ $(document).ready(function () {
   
 });
 
+//initiation of the webpage's values on webpage load or refresh
 var initiate = function() {
   task = {
     id: null,
@@ -86,7 +87,6 @@ var initiate = function() {
   };
   
   
-  //initiation of the webpage's values on webpage refresh
   $("#password").hide();
   $("#sign-up").hide();
   $("#option-help").hide();
