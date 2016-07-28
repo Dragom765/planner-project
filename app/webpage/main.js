@@ -4,7 +4,7 @@ $(document).ready(function () {
   var tasks = {};
   var user = {};
   
-  initiate();
+  initiate(task, tasks, user);
   
 /* lgin-user-01, plan-head-01 */
   $("#log-email").click(function() { eValidate(user); });
@@ -28,7 +28,7 @@ $(document).ready(function () {
     else if(tasks[day].offset != 0)
       tasks[day].offset = 0;
     
-    taskMaster.refresh.get.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
+    taskMaster.refresh.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
 });
   
   $("#schedule").on("click", "button.scroll-down", function() {
@@ -40,7 +40,7 @@ $(document).ready(function () {
     else if(tasks[day].length != tasks[day].offset + 10)
       tasks[day].offset = tasks[day].length - 10;
     
-    taskMaster.refresh.get.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
+    taskMaster.refresh.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
 });
   
 /* plan-wksl-02 */
@@ -68,23 +68,17 @@ $(document).ready(function () {
 });
 
 //initiation of the webpage's values on webpage load or refresh
-var initiate = function() {
-  task = {
-    id: null,
-    title: '',
-    description: '',
-    weekday: ''
-  }
+var initiate = function(task, tasks, user) {
+  task.id = null;
+  task.title = '';
+  task.description = '';
+  task.weekday = '';
   
-  tasks = {
-    increment: 3,
-  };
+  tasks.increment = 3;
   
-  user = {
-    email: '',
-    pswd: '',
-    name: ''
-  };
+  user.email = '';
+  user.pswd = '';
+  user.name = '';
   
   
   $("#password").hide();

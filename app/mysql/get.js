@@ -34,6 +34,7 @@ module.exports = {
     con.query("SELECT day, weekday FROM week ORDER BY ordr;", function(err, week) {
       if(err)
         res.send(err.message);
+      
       res.json(week);
       return;
     });
