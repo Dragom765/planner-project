@@ -51,7 +51,7 @@ var pswdValidate = function(user, tasks) {
           alert("Password incorrect. Please try again.");
           $("#pswd").select();
         } else {
-          solidifyUser(user);
+          solidifyUser(user, tasks);
         }
       }
     });
@@ -87,7 +87,7 @@ var signupValidate = function(user, tasks) {
           alert(data.message);
           $("#pswd-create").select();
         } else {
-          solidifyUser(user);
+          solidifyUser(user, tasks);
         }
       
       }
@@ -96,7 +96,7 @@ var signupValidate = function(user, tasks) {
 }
 
 /* plan-head-02-01 & plan-head-02-02 enabler */
-var solidifyUser = function(user) {
+var solidifyUser = function(user, tasks) {
   $.ajax({
     "method": "GET",
     "crossDomain": true,

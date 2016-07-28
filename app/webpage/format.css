@@ -122,7 +122,8 @@ li {
   width: 100%;
 }
 
-#override-bootstrap .scroll-up, .scroll-down{
+#override-bootstrap .scroll-up,
+#override-bootstrap .scroll-down{
   height: .25rem;
   cursor: pointer;
 }

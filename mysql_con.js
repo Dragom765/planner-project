@@ -91,7 +91,7 @@ router.route("/week")
     gets.getWeek(res, req, con);
   })
 
-router.route("/wkday/tasks/:email&:day")
+router.route("/wkday/tasks/:user_id&:day")
   .get(function(req, res) {
     gets.getDayTasks(res, req, con);
   });
@@ -104,7 +104,7 @@ router.route("/tasks/add")
     posts.makeTask(res, req, con);
   });
   
-router.route("/tasks/change/:id&:email")
+router.route("/tasks/change/:id")
 
   .put(function(req, res) {
     puts.updateTask(res, req, con);

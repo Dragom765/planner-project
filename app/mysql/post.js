@@ -21,12 +21,12 @@ module.exports = {
   
 /* plan-tlbr-03 */
   makeTask: function(res, req, con) {
-    var email = req.body.email;
+    var user_id = req.body.user_id;
     var day = req.body.day;
     var title = req.body.title;
     var desc = req.body.description;
     
-    con.query("INSERT INTO tasks(email, day, title, description) VALUES (?, ?, ?, ?);", [email, day, title, desc], function(err) {
+    con.query("INSERT INTO tasks(user_id, day, title, description) VALUES (?, ?, ?, ?);", [user_id, day, title, desc], function(err) {
       if(err)
         res.send(err.message);
       else

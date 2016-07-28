@@ -57,10 +57,10 @@ module.exports = {
 
   /* rest-get-01 */
   getDayTasks: function(res, req, con) {
-    var email = req.params.email;
+    var user_id = req.params.user_id;
     var day = req.params.day;
     
-    con.query("SELECT id, title, description FROM tasks WHERE email = ? AND day = ?;", [email, day], function(err, taskDay) {
+    con.query("SELECT id, title, description FROM tasks WHERE user_id = ? AND day = ?;", [user_id, day], function(err, taskDay) {
       if(err)
         res.send(err.message);
       

@@ -39,7 +39,7 @@ var taskMaster = {
         $.ajax({
           "method": "GET",
           "crossDomain": true,
-          "url": "http://localhost:6143/api/wkday/tasks/"+user.email+"&"+presday.day,
+          "url": "http://localhost:6143/api/wkday/tasks/"+user.id+"&"+presday.day,
           "success": function(daytasks) {
             var size = daytasks.length;
             if(size % 10 || size == 0) {
@@ -99,7 +99,7 @@ var taskMaster = {
               "crossDomain": true,
               "url": "http://localhost:6143/api/tasks/add",
               "data": {
-                "email": user.email,
+                "user_id": user.id,
                 "day": task.weekday,
                 "title": task.title,
                 "description": task.description
@@ -115,6 +115,10 @@ var taskMaster = {
                   task.title = '';
                   task.description = '';
                   task.weekday = '';
+                    
+                  $("#title").val('');
+                  $("#description").val('');
+                  $("#wkday-select").text("Day of the week:").append("<span class=\"caret\"></span>");
                 }
               }
             });
@@ -135,7 +139,7 @@ var taskMaster = {
               $.ajax({
                 "method": "PUT",
                 "crossDomain": true,
-                "url": "http://localhost:6143/api/tasks/change/"+task.id+"&"+user.email,
+                "url": "http://localhost:6143/api/tasks/change/"+task.id,
                 "data": {
                   "title": titleBox,
                   "description": descBox
@@ -167,7 +171,7 @@ var taskMaster = {
               $.ajax({
                 "method": "DELETE",
                 "crossDomain": true,
-                "url": "http://localhost:6143/api/tasks/change/"+task.id+"&"+user.email,
+                "url": "http://localhost:6143/api/tasks/change/"+task.id,
                 "success": function(data) {
                   if(data.message != "Task deleted")
                     alert(data.message+" yoo-hoo");
@@ -196,7 +200,7 @@ var taskMaster = {
         $.ajax({
           "method": "GET",
           "crossDomain": true,
-          "url": "http://localhost:6143/api/wkday/tasks/"+user.email+"&"+day,
+          "url": "http://localhost:6143/api/wkday/tasks/"+user.id+"&"+day,
           "success": function(daytasks) {
             var size = daytasks.length;
             if(size % 10 || size == 0) {

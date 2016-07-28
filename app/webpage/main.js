@@ -4,7 +4,7 @@ $(document).ready(function () {
   var tasks = {};
   var user = {};
   
-  initiate();
+  initiate(task, tasks, user);
   
 /* lgin-user-01, plan-head-01 */
   $("#log-email").click(function() { eValidate(user); });
@@ -16,7 +16,9 @@ $(document).ready(function () {
   $("#log-create").click(function() { signupValidate(user, tasks); });
 
 /* plan-head-02-01 */
-  $("#pswd-change").click(pswdChangeOption);
+  $("#pswd-change").click(togglePswdChange);
+  
+  $("#cancelChange").click(togglePswdChange);
 
 /* plan-head-02-01 */
   $("#setPassword").click(function() { changePswd(user); });
@@ -34,7 +36,7 @@ $(document).ready(function () {
     else if(tasks[day].offset != 0)
       tasks[day].offset = 0;
     
-    taskMaster.refresh.get.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
+    taskMaster.refresh.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
 });
   
   $("#schedule").on("click", "button.scroll-down", function() {
@@ -43,10 +45,10 @@ $(document).ready(function () {
     
     if(tasks[day].length >= check) 
       tasks[day].offset += tasks.increment;
-    else if(tasks[day].length != tasks[day].offset + 10)
+    else if(tasks[day].length != tasks[day].offset)
       tasks[day].offset = tasks[day].length - 10;
     
-    taskMaster.refresh.get.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
+    taskMaster.refresh.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
 });
   
 /* plan-wksl-02 */
@@ -73,24 +75,18 @@ $(document).ready(function () {
   
 });
 
-var initiate = function() {
-  task = {
-    id: null,
-    title: '',
-    description: '',
-    weekday: ''
-  }
+var initiate = function(task, tasks, user) {
+  task.id = null;
+  task.title = '';
+  task.description = '';
+  task.weekday = '';
   
-  tasks = {
-    increment: 3,
-  };
+  tasks.increment = 3,
   
-  user = {
-    id: '',
-    email: '',
-    pswd: '',
-    name: ''
-  };
+  user.id = '';
+  user.email = '';
+  user.pswd = '';
+  user.name = '';
   
   
   //initiation of the webpage's values on webpage refresh
@@ -106,9 +102,9 @@ var initiate = function() {
 }
 
 /* plan-head-02-01 */
-var pswdChangeOption = function() {
-  $("#tools").hide();
-  $("#newpswd").show();
+var togglePswdChange = function() {
+  $("#tools").toggle();
+  $("#newpswd").toggle();
 }
 
 /* plan-head-02-01 */
@@ -122,19 +118,21 @@ var changePswd = function(user) {
   var newpswd = sjcl.hash.sha256.hash(new1.val()).toString();
   var check = sjcl.hash.sha256.hash(takeback.val()).toString();
   
-  if(newpswd == "" || oldpswd == "" || oldpswd == "")
-    error.text("Please make sure to fill in all subject fields.")
-  else if(newpswd != check)
+  if(newpswd == "" || oldpswd == "" || oldpswd == "") {
+    error.text("Please make sure to fill in all subject fields.");
+    old.select();
+  } else if(newpswd != check) {
     error.text("The new passwords do not match. Please try again.");
-  else if(oldpswd != user.pswd)
+    new1.select();
+  } else if(oldpswd != user.pswd) {
     error.text("Your previous password is incorrect. Please try again.");
-  else {
+    old.select();
+  } else {
     $.ajax({
       "method": "PUT",
       "crossDomain": true,
       "url": "http://localhost:6143/api/user/newpswd/",
       "data": {
-        "email": user.email,
         "id": user.id,
         "newpswd": newpswd
       },
