@@ -120,3 +120,15 @@ var solidifyUser = function(user, tasks) {
 var custTitle = function(email) {
   $("#header").text(email+"'s Task list");
 }
+
+//allows backtracking in case of typos/misclicks
+var gotoEmail = function() {
+  $("#pswd").val("");
+  $("#pswd-create").val("");
+  $("#confirm").val("");
+  
+  $("#password").hide();
+  $("#sign-up").hide();
+  $("#username").show();
+  $("#email").select();
+}

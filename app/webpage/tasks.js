@@ -15,6 +15,45 @@ var showInfo = function(day, chosenTask) {
   $("#wkday-select").text(day).append("<span class=\"caret\"></span>");
 }
 
+/* plan-wksl-01-03 */
+var scrollUp = function(that, tasks, task) {
+  var day = $(that).val();
+  var check = tasks[day].offset - task.increment;
+  
+  if(check >= 0) 
+    tasks[day].offset -= task.increment;
+  else if(tasks[day].offset != 0)
+    tasks[day].offset = 0;
+  
+  taskMaster.refresh.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
+}
+
+var scrollDown = function(that, tasks, task, taskMaster) {
+  var day = $(that).val();
+  var check = 10 + tasks[day].offset + task.increment;
+  
+  if(tasks[day].length >= check) 
+    tasks[day].offset += task.increment;
+  else if(tasks[day].length != tasks[day].offset)
+    tasks[day].offset = tasks[day].length - 10;
+  
+  taskMaster.refresh.refreshDayTasks(day, tasks);  // 'refreshes' now that the offset is different
+}
+
+/* plan-wksl-02 */
+var prepInfo = function(that, tasks, task, taskMaster) {
+    var label = $(that).attr("id");
+    var day = label.slice(0, -6);
+    var taskIndex = Number(label.slice(-1)) + tasks[day].offset;
+    
+    task.id = tasks[day][taskIndex].id;
+    task.title = tasks[day][taskIndex].title;
+    task.description = tasks[day][taskIndex].description;
+    task.weekday = day;
+    
+    showInfo(day, tasks[day][taskIndex]);
+}
+
 var taskMaster = {
   create: {
     get: {

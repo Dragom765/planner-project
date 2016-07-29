@@ -43,12 +43,16 @@ router.get("/format.css", function(req, res) {
   res.sendFile(__dirname+"/app/webpage/format.css");
 });
 
-router.get("/login.js", function(req, res) {
-  res.sendFile(__dirname+"/app/webpage/login.js");
+router.get("/options-list.js", function(req, res) {
+  res.sendFile(__dirname+"/app/webpage/options-list.js");
 });
 
 router.get("/tasks.js", function(req, res) {
   res.sendFile(__dirname+"/app/webpage/tasks.js");
+});
+
+router.get("/login.js", function(req, res) {
+  res.sendFile(__dirname+"/app/webpage/login.js");
 });
 
 router.get("/main.js", function(req, res) {
