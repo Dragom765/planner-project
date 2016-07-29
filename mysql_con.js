@@ -116,11 +116,16 @@ router.route("/tasks/change/:id")
 
 /* plan-head-02 */
 // edit profile ----------------------------------------------------------------
-router.route("/user/newpswd")
+router.route("/user/change")
   
   .put(function(req, res) {
     puts.newPswd(res, req, con, crypto);
+  })
+  
+  .delete(function(req, res) {
+    deletes.deleteUser(res, req, con);
   });
+
 
 // -----------------------------------------------------------------------------
 

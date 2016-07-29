@@ -28,7 +28,7 @@ module.exports = {
     
     con.query("INSERT INTO tasks(user_id, day, title, description) VALUES (?, ?, ?, ?);", [user_id, day, title, desc], function(err) {
       if(err)
-        res.send(err.message);
+        res.send(err);
       else
         res.send({ message: "Task created"});
       return;

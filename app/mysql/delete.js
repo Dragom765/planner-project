@@ -8,7 +8,20 @@ module.exports = {
         res.send(err.message);
       else
         res.send({ message: "Task deleted" });
+      return;
     });
   },
+  
+  deleteUser: function(res, req, con) {
+    var id = req.body.id;
+    
+    con.query("DELETE FROM users WHERE id = ?", id, function(err) {
+      if(err) {
+        res.send(err.message);
+      } else
+        res.send({ message: "User deleted" });
+      return;
+    });
+  }
   
 }

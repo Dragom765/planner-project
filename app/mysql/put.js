@@ -21,10 +21,10 @@ module.exports = {
     
     con.query("UPDATE users SET pswd = ? WHERE id = ?", [newpswd, id], function(err) {
       if(err) {
-        res.send(err.message);
-        throw err;
+        res.send(err);
       } else
         res.send({ message: "Password updated" });
+      return;
     });
   }
 }

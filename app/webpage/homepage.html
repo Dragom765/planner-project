@@ -26,7 +26,12 @@
           </div>
         </div>
         <div class="col-md-1 front">
-          <button class="user-verify" id="log-email">Next</button> 
+          <div class="signin-divs1">
+            <div class="spacer"></div>
+            <div class="signin-div">
+              <button class="user-verify" id="log-email">Next</button>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -39,7 +44,13 @@
           </div>
         </div>
         <div class="col-md-1 front">
-          <button class="user-verify" id="log-pswd">Login</button> 
+          <div class="signin-divs1">
+            <div class="spacer"></div>
+            <div class="signin-div">
+              <button class="user-verify" id="log-pswd">Login</button>
+              <button class="user-verify email-return">Back</button>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -59,7 +70,13 @@
               </div>
             </div>
             <div class="col-md-3">
-              <button class="user-verify" id="log-create">Sign Up</button> 
+              <div class="signin-divs2">
+                <div class="spacer"></div>
+                <div class="signin-div">
+                  <button class="user-verify" id="log-create">Sign Up</button>
+                  <button class="user-verify email-return">Back</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -80,6 +97,7 @@
           <div class="dropdown" id="option-div">
             <button id="option-btn" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></button>
             <ul class="dropdown-menu">
+              <li id="logout-user"><p>Logout</p></li>
               <li id="pswd-change"><p>Change your password</p></li>
               <li id="end-user"><p>Delete your account</p></li>
               <li class="divider"></li>
@@ -154,10 +172,16 @@
               <button id="setPassword">Submit</button>
               <button id="cancelChange">Cancel</button>
             </div>
-            
-            <div>
-              <p id="err-pswd-change"></p>
-            </div>
+          </div>
+          
+          <div id="check-user">
+            <h4>Are you sure you want to <span id="filler"></span>?</h4>
+            <button id="yes-action">Yes</button>
+            <button id="no-action">No</button>
+          </div>
+          
+          <div>
+            <p id="err-pswd-change"></p>
           </div>
         </div>
       </div>
