@@ -5,11 +5,13 @@ function eValidate(user) {
   var place = user.email.search("@");
   if(user.email == "" || user.email == undefined || place <= 0) {
 // .search() throws -1 if not found, this makes sure '@' isn't missing or first.
-    alert("Please enter a valid email address.");
+    $("#err-login-bar").text("Please enter a valid email address.");
     $("#email").select();
   } else {
     user.name = user.email.substring(0, place);
     custTitle(user.name);
+    $("#err-login-bar").text("");
+    
 /* lgin-user-02 */
   $.ajax({
     "method": "GET",
@@ -25,7 +27,6 @@ function eValidate(user) {
         $("#username").hide();
         $("#sign-up").show();
         $("#pswd-create").select();
-  
       }
     }
   });
@@ -37,7 +38,7 @@ var pswdValidate = function(user, tasks) {
   var pswd = $("#pswd").val();
   
   if(pswd == "" && pswd == undefined){
-    alert("Please enter your password.");
+    $("#err-login-bar").text("Please enter your password.");
   } else {
 /* lgin-pswd-02 */
     user.pswd = sjcl.hash.sha256.hash(pswd).toString();
@@ -48,10 +49,11 @@ var pswdValidate = function(user, tasks) {
       "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
       "success": function(data) {
         if(data != 1) {
-          alert("Password incorrect. Please try again.");
+          $("#err-login-bar").text("Password incorrect. Please try again.");
           $("#pswd").select();
         } else {
           solidifyUser(user, tasks);
+          $("#err-login-bar").text("");
         }
       }
     });
@@ -64,10 +66,10 @@ var signupValidate = function(user, tasks) {
   var check = $("#confirm").val();
   
   if(newPswd == "") {
-    alert("Please make sure you have entered a password.");
+    $("#err-login-bar").text("Please make sure you have entered a password.");
     $("#pswd-create").select();
   } else if(newPswd != check) {
-    alert("Please make sure your passwords match");
+    $("#err-login-bar").text("Please make sure your passwords match");
     $("#pswd-create").select();
   } else {
     user.pswd = sjcl.hash.sha256.hash(newPswd).toString();
@@ -84,10 +86,11 @@ var signupValidate = function(user, tasks) {
         },
       "success": function(data) {
         if(data.message != "Success") {
-          alert(data.message);
+          $("#err-login-bar").text(data.message);
           $("#pswd-create").select();
         } else {
           solidifyUser(user, tasks);
+          $("#err-login-bar").text("");
         }
       
       }
@@ -103,12 +106,13 @@ var solidifyUser = function(user, tasks) {
     "url": "http://localhost:6143/api/solid/"+user.email+"&"+user.pswd,
     "success": function(data) {
       if(typeof data != "number") {
-        alert(data+"\nSomething went wrong. Please try again.");
+        $("#err-login-bar").text(data+"\nSomething went wrong. Please try again.");
         $("#pswd-create").select();
       } else {
         user.id = data;
         
         taskMaster.create.get.start.listWeek(user, tasks);
+        $("#err-login-bar").text("");
         $(".top").hide();
         $("#week-scheduler").show();
       }

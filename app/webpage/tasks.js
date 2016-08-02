@@ -129,9 +129,9 @@ var taskMaster = {
           task.description = $("#description").val();
   
           if(task.title == "")
-            alert("Please give the task a title");
+            $("#err-msg-bar").text("Please give the task a title");
           else if(task.weekday == "")
-            alert("Please choose a day of the week");
+            $("#err-msg-bar").text("Please choose a day of the week");
           else {
             $.ajax({
               "method": "POST",
@@ -145,7 +145,7 @@ var taskMaster = {
               },
               "success": function(data) {
                 if(data.message != "Task created")
-                  alert(data.message);
+                  $("#err-msg-bar").text(data.message);
                 else {
                   taskMaster.refresh.get.refreshDay(user, tasks, task.weekday);
           
@@ -158,6 +158,7 @@ var taskMaster = {
                   $("#title").val('');
                   $("#description").val('');
                   $("#wkday-select").text("Day of the week:").append("<span class=\"caret\"></span>");
+                  $("#err-msg-bar").text("");
                 }
               }
             });
@@ -170,10 +171,12 @@ var taskMaster = {
           var descBox = $("#description").val();
           
           if(task.id == null || task.title == '' || task.weekday == '')
-            alert("Please make sure an existing task is selected, and a title is present");
+            $("#err-msg-bar").text("Please make sure an existing task is selected, and a title is present");
           else {
             if(task.title == titleBox && task.description == descBox)
-              alert("Change the title or the description of the task; you cannot change the weekday of a task as of yet.");
+              $("#err-msg-bar").text("Change the title or the description of the task; you cannot change the weekday of a task as of yet.");
+            else if(titleBox == "")
+              $("#err-msg-bar").text("You must add some kind of title before you continue.");
             else {
               $.ajax({
                 "method": "PUT",
@@ -185,9 +188,10 @@ var taskMaster = {
                 },
                 "success": function(data) {
                   if(data.message != "Task updated")
-                    alert(data.message);
+                    $("#err-msg-bar").text(data.message);
                   else {
                     taskMaster.refresh.get.refreshDay(user, tasks, task.weekday);
+                    $("#err-msg-bar").text("");
                   }
                 }
               });
@@ -202,10 +206,10 @@ var taskMaster = {
           var wkdaySelect = $("#wkday-select").text();
   
           if(task.id == null || task.title == '' || task.weekday == '')
-            alert("Please select a task before deletion");
+            $("#err-msg-bar").text("Please select a task before deletion");
           else {
             if(task.title != titleBox || task.description != descBox || task.weekday != wkdaySelect)
-              alert("Task information has been edited. Please refresh task information to delete.");
+              $("#err-msg-bar").text("Task information has been edited. Please refresh task information to delete.");
             else {
               $.ajax({
                 "method": "DELETE",
@@ -213,7 +217,7 @@ var taskMaster = {
                 "url": "http://localhost:6143/api/tasks/change/"+task.id,
                 "success": function(data) {
                   if(data.message != "Task deleted")
-                    alert(data.message+" yoo-hoo");
+                    $("#err-msg-bar").text(data.message);
                   else {
                     taskMaster.refresh.get.refreshDay(user, tasks, task.weekday);
 
@@ -226,6 +230,7 @@ var taskMaster = {
                     $("#title").val('');
                     $("#description").val('');
                     $("#wkday-select").text("Day of the week:").append("<span class=\"caret\"></span>");
+                    $("#err-msg-bar").text("");
                   }
                 }
               });

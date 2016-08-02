@@ -57,5 +57,4 @@ $(document).ready(function () {
   $("#task-update").click(function() { taskMaster.refresh.get.change.updateTask(task, tasks, user); });
   
   $("#task-delete").click(function() { taskMaster.refresh.get.change.killTask(task, tasks, user); });
-/* end */
 });

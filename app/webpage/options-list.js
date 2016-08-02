@@ -27,7 +27,7 @@ var initiate = function(task, user) {
   $("#title").val("");
   $("#description").val("");
   $("#filler").val("");
-  $("#err-pswd-change").text("");
+  $("#err-msg-bar").text("");
 }
 
 /* plan-head-02-01 */
@@ -41,7 +41,7 @@ var changePswd = function(user) {
   var old = $("#oldpswd");
   var new1 = $("#new-change");
   var takeback = $("#newconfirm");
-  var error = $("#err-pswd-change");
+  var error = $("#err-msg-bar");
   
   var oldpswd = sjcl.hash.sha256.hash(old.val()).toString();
   var newpswd = sjcl.hash.sha256.hash(new1.val()).toString();
@@ -104,7 +104,7 @@ var action = function(user, task, tasks, initiate) {
      },
      "success": function(data) {
        if(data.message != "User deleted")
-         $("#err-pswd-change").text(data);
+         $("#err-msg-bar").text(data);
        else {
         initiate(task, user);
         tasks = {};
@@ -124,7 +124,7 @@ var action = function(user, task, tasks, initiate) {
     $("#check-user").hide();
     $("#tools").show();
   } else
-    $("#err-pswd-change").text("There seems to be an error. Please refresh the page.");
+    $("#err-msg-bar").text("There seems to be an error. Please refresh the page.");
 }
 
 /* plan-head-02-02 */
@@ -132,7 +132,7 @@ var negateAction = function() {
   $("#check-user").hide();
   $("#tools").show();
   
-  $("#err-pswd-change").text("");
+  $("#err-msg-bar").text("");
   $("#filler").val("");
 }
 
