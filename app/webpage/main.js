@@ -5,6 +5,7 @@ $(document).ready(function () {
   var user = {};
   
   initiate(task, user);
+  checkUser(user, tasks, pswdValidate);
   
 /* lgin-user-01, plan-head-01 */
   $("#log-email").click(function() { eValidate(user); });
@@ -58,3 +59,32 @@ $(document).ready(function () {
   
   $("#task-delete").click(function() { taskMaster.refresh.get.change.killTask(task, tasks, user); });
 });
+
+/* uses user cookies */
+var checkUser = function(user, tasks, pswdValidate) {
+  var list = document.cookie.split("; ");
+  var cookies = {
+    emailuser: "~",
+    pswduser: "~",
+  };
+  var numOfCookies = list.length;
+  var cut;
+  
+  if(numOfCookies >= 2) {
+    for(i = 0; i < numOfCookies; i++) {
+      cut = list[i].split("=");
+      if(cut[0] === "emailuser")
+        cookies.emailuser = cut[1];
+      else if(cut[0] === "pswduser") {
+        cookies.pswduser = cut[1];
+      }
+    }
+  }
+  
+  if(cookies.emailuser !== "~" && cookies.pswduser !== "~") {
+    user.email = cookies.emailuser;
+    user.pswd = cookies.pswduser; 
+    pswdREST(user, tasks);
+    custTitle(user.email);
+  }
+}

@@ -1,5 +1,6 @@
 //initiation of the webpage's values on webpage refresh
 var initiate = function(task, user) {
+  //***Some general resets
   task.id = null;
   task.title = '';
   task.description = '';
@@ -17,17 +18,20 @@ var initiate = function(task, user) {
   $("#password").hide();
   $("#sign-up").hide();
   $("#option-help").hide();
-  $("#week-scheduler").hide();
   $("#newpswd").hide();
   $("#check-user").hide();
-  $("#login").show();
-  $("#username").show();
   $("#email").val("").select();
   $("#pswd").val("");
   $("#title").val("");
   $("#description").val("");
   $("#filler").val("");
   $("#err-msg-bar").text("");
+  $("#err-login-bar").text("");
+  
+  //***Resets to be done if the user has no information saved
+    $("#week-scheduler").hide();
+    $("#login").show();
+    $("#username").show();
 }
 
 /* plan-head-02-01 */
@@ -57,13 +61,14 @@ var changePswd = function(user) {
     error.text("Your previous password is incorrect. Please try again.");
     old.select();
   } else {
+    user.pswd = newpswd;
     $.ajax({
       "method": "PUT",
       "crossDomain": true,
       "url": "http://localhost:6143/api/user/change/",
       "data": {
         "id": user.id,
-        "newpswd": newpswd
+        "newpswd": user.pswd
       },
       "success": function(data) {
         if(data.message != "Password updated")
@@ -75,6 +80,8 @@ var changePswd = function(user) {
           takeback.val("");
           $("#newpswd").hide();
           $("#tools").show();
+          
+          saveUser(user);
         }
       }
     });
@@ -107,6 +114,7 @@ var action = function(user, task, tasks, initiate) {
          $("#err-msg-bar").text(data);
        else {
         initiate(task, user);
+        resetUser();
         tasks = {};
         $("#schedule").empty();
   
@@ -118,6 +126,7 @@ var action = function(user, task, tasks, initiate) {
   }
   else if(choice == "logout") {
     initiate(task, user);
+    resetUser();
     tasks = {};
     $("#schedule").empty();
   
@@ -138,4 +147,15 @@ var negateAction = function() {
 
 var helpText = function(task) {
   $("#option-help").toggle();
+}
+
+/* enables user cookie usage */
+var saveUser = function(user) {
+  document.cookie = "emailuser="+user.email;
+  document.cookie = "pswduser="+user.pswd;
+}
+
+var resetUser = function() {
+  document.cookie = "emailuser=; expires=Monday, 18 Dec 12:00:00 UTC;";
+  document.cookie = "pswduser=; expires=Monday, 18 Dec 12:00:00 UTC;";
 }

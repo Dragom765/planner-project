@@ -8,8 +8,7 @@ function eValidate(user) {
     $("#err-login-bar").text("Please enter a valid email address.");
     $("#email").select();
   } else {
-    user.name = user.email.substring(0, place);
-    custTitle(user.name);
+    custTitle(user.email);
     $("#err-login-bar").text("");
     
 /* lgin-user-02 */
@@ -43,21 +42,25 @@ var pswdValidate = function(user, tasks) {
 /* lgin-pswd-02 */
     user.pswd = sjcl.hash.sha256.hash(pswd).toString();
     
-    $.ajax({
-      "method": "GET",
-      "crossDomain": true,
-      "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
-      "success": function(data) {
-        if(data != 1) {
-          $("#err-login-bar").text("Password incorrect. Please try again.");
-          $("#pswd").select();
-        } else {
-          solidifyUser(user, tasks);
-          $("#err-login-bar").text("");
-        }
-      }
-    });
+    pswdREST(user, tasks);
   }
+}
+
+var pswdREST = function(user, tasks) {
+  $.ajax({
+    "method": "GET",
+    "crossDomain": true,
+    "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
+    "success": function(data) {
+      if(data != 1) {
+        $("#err-login-bar").text("Password incorrect. Please try again.");
+        $("#pswd").select();
+      } else {
+        solidifyUser(user, tasks);
+        $("#err-login-bar").text("");
+      }
+    }
+  });
 }
 
 /* lgin-npwd-01 */
@@ -111,6 +114,8 @@ var solidifyUser = function(user, tasks) {
       } else {
         user.id = data;
         
+        saveUser(user);
+        
         taskMaster.create.get.start.listWeek(user, tasks);
         $("#err-login-bar").text("");
         $(".top").hide();
@@ -122,7 +127,9 @@ var solidifyUser = function(user, tasks) {
 
 /* plan-head-01 */
 var custTitle = function(email) {
-  $("#header").text(email+"'s Task list");
+  var place = email.search("@");
+  var name = email.substring(0, place);
+  $("#header").text(name+"'s Task list");
 }
 
 //allows backtracking in case of typos/misclicks
