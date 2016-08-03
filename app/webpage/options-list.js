@@ -1,15 +1,10 @@
 //initiation of the webpage's values on webpage refresh
-var initiate = function(task, user) {
+var initiate = function(tasks, task, user, num) {
   //***Some general resets
   task.id = null;
   task.title = '';
   task.description = '';
   task.weekday = '';
-  
-  user.id = '';
-  user.email = '';
-  user.pswd = '';
-  user.name = '';
   
   $("#title").val('');
   $("#description").val('');
@@ -28,10 +23,21 @@ var initiate = function(task, user) {
   $("#err-msg-bar").text("");
   $("#err-login-bar").text("");
   
-  //***Resets to be done if the user has no information saved
-    $("#week-scheduler").hide();
+  //***Resets to be done based on saved user information
+  if(num == 0) {
+    $(".top").show();
     $("#login").show();
     $("#username").show();
+    resetUser();
+    tasks = {};
+    $("#schedule").empty();
+    $("#week-scheduler").hide();
+  
+    user.id = '';
+    user.email = '';
+    user.pswd = '';
+  } else
+    $("#week-scheduler").show();
 }
 
 /* plan-head-02-01 */
@@ -113,25 +119,17 @@ var action = function(user, task, tasks, initiate) {
        if(data.message != "User deleted")
          $("#err-msg-bar").text(data);
        else {
-        initiate(task, user);
-        resetUser();
-        tasks = {};
-        $("#schedule").empty();
-  
         $("#check-user").hide();
         $("#tools").show();
+        initiate(tasks, task, user, 0);
        }
      }
    }); 
   }
   else if(choice == "logout") {
-    initiate(task, user);
-    resetUser();
-    tasks = {};
-    $("#schedule").empty();
-  
     $("#check-user").hide();
     $("#tools").show();
+    initiate(tasks, task, user, 0);
   } else
     $("#err-msg-bar").text("There seems to be an error. Please refresh the page.");
 }
@@ -156,6 +154,6 @@ var saveUser = function(user) {
 }
 
 var resetUser = function() {
-  document.cookie = "emailuser=; expires=Monday, 18 Dec 12:00:00 UTC;";
-  document.cookie = "pswduser=; expires=Monday, 18 Dec 12:00:00 UTC;";
+  document.cookie = "emailuser=;expires=Fri, 02 Jan 1970 00:00:01 GMT;";
+  document.cookie = "pswduser=;expires=Fri, 02 Jan 1970 00:00:01 GMT;";
 }

@@ -42,25 +42,21 @@ var pswdValidate = function(user, tasks) {
 /* lgin-pswd-02 */
     user.pswd = sjcl.hash.sha256.hash(pswd).toString();
     
-    pswdREST(user, tasks);
-  }
-}
-
-var pswdREST = function(user, tasks) {
-  $.ajax({
-    "method": "GET",
-    "crossDomain": true,
-    "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
-    "success": function(data) {
-      if(data != 1) {
-        $("#err-login-bar").text("Password incorrect. Please try again.");
-        $("#pswd").select();
-      } else {
-        solidifyUser(user, tasks);
-        $("#err-login-bar").text("");
+    $.ajax({
+      "method": "GET",
+      "crossDomain": true,
+      "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
+      "success": function(data) {
+        if(data != 1) {
+          $("#err-login-bar").text("Password incorrect. Please try again.");
+          $("#pswd").select();
+        } else {
+          solidifyUser(user, tasks);
+          $("#err-login-bar").text("");
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 /* lgin-npwd-01 */

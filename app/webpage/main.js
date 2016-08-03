@@ -4,8 +4,9 @@ $(document).ready(function () {
   var tasks = {};
   var user = {};
   
-  initiate(task, user);
-  checkUser(user, tasks, pswdValidate);
+    $("#week-scheduler").hide();
+    $(".top").hide();
+  checkUser(user, task, tasks);
   
 /* lgin-user-01, plan-head-01 */
   $("#log-email").click(function() { eValidate(user); });
@@ -61,16 +62,18 @@ $(document).ready(function () {
 });
 
 /* uses user cookies */
-var checkUser = function(user, tasks, pswdValidate) {
+var checkUser = function(user, task, tasks) {
   var list = document.cookie.split("; ");
   var cookies = {
-    emailuser: "~",
-    pswduser: "~",
+    emailuser: "",
+    pswduser: "",
   };
   var numOfCookies = list.length;
   var cut;
   
-  if(numOfCookies >= 2) {
+  if(numOfCookies < 2)
+    initiate(tasks, task, user, 0);
+  else {
     for(i = 0; i < numOfCookies; i++) {
       cut = list[i].split("=");
       if(cut[0] === "emailuser")
@@ -79,12 +82,26 @@ var checkUser = function(user, tasks, pswdValidate) {
         cookies.pswduser = cut[1];
       }
     }
-  }
   
-  if(cookies.emailuser !== "~" && cookies.pswduser !== "~") {
-    user.email = cookies.emailuser;
-    user.pswd = cookies.pswduser; 
-    pswdREST(user, tasks);
-    custTitle(user.email);
+    if(cookies.emailuser !== "" && cookies.pswduser !== "") {
+      user.email = cookies.emailuser;
+      user.pswd = cookies.pswduser; 
+      $.ajax({
+        "method": "GET",
+        "crossDomain": true,
+        "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
+        "success": function(data) {
+          if(data != 1) {
+            initiate(tasks, task, user, 0);
+          } else {
+            initiate(tasks, task, user, 1);
+            solidifyUser(user, tasks);
+          }
+        }
+      });
+      custTitle(user.email);
+    } else {
+      initiate(tasks, task, user, 0);
+    }
   }
 }
