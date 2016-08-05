@@ -4,9 +4,33 @@
   border: none;
 }
 
+input{
+  border-radius: 4px;
+}
+
+button{
+  border-radius: 4px;
+}
+
 #override-bootstrap .row{
   margin-top: 0;
   margin-bottom: 0;
+}
+
+#override-bootstrap .centered{
+  min-height: 70vh;
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+#login{
+  width: 100%;
+}
+
+#edge{
+  height: content;
+  width: content;
 }
 
 /* plan-head-02, plan-tlbr-02 */
@@ -29,6 +53,8 @@ li {
 /* lgin-user */
 #override-bootstrap .front{
   background: #99ccff;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 
 /* these next three format the login buttons' layouts */
@@ -66,14 +92,28 @@ li {
 
 /* lgin-npwd */
 #override-bootstrap .create{
-  border: 1px solid black;
   margin: 5px;
+  border-radius: 10px;
+}
+
+.create #skinny{
+  margin-top: .5rem;
+}
+
+/* plan-wksl, plan-tlbr */
+#week-scheduler{
+  height: 100vh;
+}
+
+#body{
+  height: 87.5vh;
 }
 
 /* plan-head */
 #override-bootstrap #title-bar{
   background: #b3ffb3;
   border: 1px solid grey;
+  height: 12.5vh;
 }
 
 /* plan-head-01 */
@@ -106,9 +146,8 @@ li {
   margin-top: 5rem;
 }
 
-/* plan-wksl, plan-tlbr */
-#body{
-  height: 80rem;
+#change-button{
+  margin-top: 2rem;
 }
 
 /* plan-wksl */

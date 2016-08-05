@@ -4,8 +4,8 @@ $(document).ready(function () {
   var tasks = {};
   var user = {};
   
-    $("#week-scheduler").hide();
-    $(".top").hide();
+  $("#week-scheduler").hide();
+  $(".top").hide();
   checkUser(user, task, tasks);
   
 /* lgin-user-01, plan-head-01 */
@@ -21,9 +21,9 @@ $(document).ready(function () {
   $(".email-return").click(gotoEmail);
 
 /* plan-head-02-01 */
-  $("#pswd-change").click(togglePswdChange);
+  $("#pswd-change").click(enablePswdChange);
   
-  $("#cancelChange").click(togglePswdChange);
+  $("#cancelChange").click(disablePswdChange);
 
 //logging out
   $("#logout-user").click(function() { userOut(this); });
