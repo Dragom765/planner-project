@@ -1,5 +1,4 @@
 * (lgin) Login capabilities
-
   > (-user) username (email)
     * (-01) verify there is something to verify
     * (-02) database verification
@@ -50,5 +49,5 @@
 * (rest) Node Server for RESTful API
 
   > (-conn) connection to correct database
-  > (-chek) could have ‘create database if doesn’t exist’ check
-  > (-tabl) create tables needed if none exist
+  > (-chek) ‘create database if doesn’t exist’ check
+  > (-tabl) create tables needed if it doesn’t exist

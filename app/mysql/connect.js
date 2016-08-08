@@ -31,11 +31,13 @@ con.query("CREATE DATABASE IF NOT EXISTS plan;", function(err) {
 /* rest-tabl */
     con.query("CREATE TABLE IF NOT EXISTS tasks("
       + "id int NOT NULL AUTO_INCREMENT,"
-      + "email varchar(50) NOT NULL,"
+      + "user_id int NOT NULL,"
       + "day varchar(10) NOT NULL,"
       + "title varchar(50) NOT NULL,"
       + "description varchar(255) NULL,"
-      + "PRIMARY KEY(id));", 
+      + "PRIMARY KEY(id),"
+      + "FOREIGN KEY (user_id) REFERENCES users (id)"
+      + "ON DELETE CASCADE);",
       function(err) {
         if(err)
           throw err;

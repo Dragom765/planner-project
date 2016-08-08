@@ -14,7 +14,24 @@ module.exports = {
         else
           res.send(err);
       } else
-        res.send({ message: "Success"})
+        res.send({ message: "Success"});
+      return;
+    });
+  },
+  
+/* plan-tlbr-03 */
+  makeTask: function(res, req, con) {
+    var user_id = req.body.user_id;
+    var day = req.body.day;
+    var title = req.body.title;
+    var desc = req.body.description;
+    
+    con.query("INSERT INTO tasks(user_id, day, title, description) VALUES (?, ?, ?, ?);", [user_id, day, title, desc], function(err) {
+      if(err)
+        res.send(err);
+      else
+        res.send({ message: "Task created"});
+      return;
     });
   }
   
