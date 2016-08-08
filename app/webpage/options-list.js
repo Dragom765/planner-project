@@ -5,6 +5,7 @@ var initiate = function(tasks, task, user, num) {
   task.title = '';
   task.description = '';
   task.weekday = '';
+  task.position = null;
   
   $("#title").val('');
   $("#description").val('');
@@ -164,7 +165,7 @@ var helpText = function(task) {
   $("#option-help").toggle();
 }
 
-/* enables user cookie usage */
+/* nswb-stay, enables user cookie usage */
 var saveUser = function(user) {
   document.cookie = "emailuser="+user.email;
   document.cookie = "pswduser="+user.pswd;

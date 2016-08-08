@@ -2,14 +2,16 @@
   position: relative;
   background: none;
   border: none;
+  border: none;
 }
 
-input{
+textarea, input{
   border-radius: 4px;
 }
 
-button{
+#override-bootstrap button{
   border-radius: 4px;
+  outline: none;
 }
 
 #override-bootstrap .row{
@@ -28,28 +30,6 @@ button{
   width: 100%;
 }
 
-#edge{
-  height: content;
-  width: content;
-}
-
-/* plan-head-02, plan-tlbr-02 */
-li {
-  cursor: pointer;
-}
-
-#override-bootstrap #err-login-bar{
-  padding-left: 5px;
-  padding-top: 5px;
-  height: 3rem;
-  color: red;
-}
-
-#override-bootstrap #err-msg-bar{
-  padding-top: 15px;
-  color: red;
-}
-
 /* lgin-user */
 #override-bootstrap .front{
   background: #99ccff;
@@ -57,7 +37,7 @@ li {
   border: 2px solid black;
 }
 
-/* these next three format the login buttons' layouts */
+/* these next four format the login buttons' layouts */
 .signin-divs1{
   padding: .2%;
   height: 100%;
@@ -100,13 +80,17 @@ li {
   margin-top: .5rem;
 }
 
-/* plan-wksl, plan-tlbr */
-#week-scheduler{
-  height: 100vh;
+/* the error bar for the login page */
+#override-bootstrap #err-login-bar{
+  padding-left: 5px;
+  padding-top: 5px;
+  height: 3rem;
+  color: red;
 }
 
-#body{
-  height: 87.5vh;
+/* plan-wksl, plan-tlbr, plan-head */
+#week-scheduler{
+  height: 100vh;
 }
 
 /* plan-head */
@@ -114,40 +98,13 @@ li {
   background: #b3ffb3;
   border: 1px solid grey;
   height: 12.5vh;
+  display: flex;
+  align-items: center;
 }
 
-/* plan-head-01 */
-#header{
-  font-size: 4rem;
-  padding: .4rem;
-}
-
-/* plan-head-02 */
-#override-bootstrap #option-div{
-  height: 6rem;
-  width: 6rem;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-#option-btn{
-  background: url(https://cdn1.iconfinder.com/data/icons/seo-13/512/settings-128.png);
-  height: 3rem;
-  width: 3rem;
-  background-size: 100%;
-  position: absolute;
-  bottom: 1rem;
-  left: 2rem;
-}
-
-/* plan-head-02-03 */
-#option-help{
-  margin-top: 5rem;
-}
-
-#change-button{
-  margin-top: 2rem;
+/* plan-wksl, plan-tlbr */
+#body{
+  height: 87.5vh;
 }
 
 /* plan-wksl */
@@ -157,7 +114,13 @@ li {
   border: 1px solid grey;
 }
 
-.week{
+/* highlights the current day */
+#override-bootstrap .today{
+  background-color: #BBFEF8;
+}
+
+/* plan-wksl-02 */
+#override-bootstrap .week{
   height: 100%;
   flex-grow: 1;
   flex-basis: 5rem;
@@ -172,19 +135,21 @@ li {
   border: 2px solid #686868;
 }
 
-.list{
-  height: 100%;
-  width: 100%;
-}
-
 #override-bootstrap .task{
   text-align: center;
+  background-color: #FFFFFF;
+  transition: background-color .5s ease-in;
   display: table;
   height: 10%;
   width: 100%;
   flex-grow: 1;
   padding: 1rem;
   border: 1px solid #bdbdbd;
+}
+
+#override-bootstrap .chosen{
+  background-color: #FFFF00;
+  transition: background-color 0s;
 }
 
 #override-bootstrap .task > div{
@@ -195,6 +160,13 @@ li {
   vertical-align: middle;
 }
 
+#override-bootstrap .filled{
+  cursor: pointer;
+  background-color: #F5F5F5;
+  border-radius: 5px;
+}
+
+/* plan-wksl-03 */
 #override-bootstrap .scroll-div{
   width: 100%;
 }
@@ -203,6 +175,52 @@ li {
 #override-bootstrap .scroll-down{
   font-size: 1rem;
   cursor: pointer;
+}
+
+/* plan-head-01 */
+#header{
+  font-size: 4rem;
+  padding: .4rem;
+}
+
+/* plan-head-02 */
+#override-bootstrap #option-div{
+  height: 6rem;
+  width: 6rem;
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+
+#option-btn{
+  background: url(https://cdn1.iconfinder.com/data/icons/seo-13/512/settings-128.png);
+  background-color: #DCDCDC;
+  height: 3.25rem;
+  width: 3.25rem;
+  background-size: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border: 3px solid #CDCDCD;
+}
+
+/* plan-head-02, plan-tlbr-02 */
+li {
+  cursor: pointer;
+}
+
+.list{
+  height: 100%;
+  width: 100%;
+}
+
+/* plan-head-02-03 */
+#option-help{
+  margin-top: 5rem;
+}
+
+#change-button{
+  margin-top: 2rem;
 }
 
 /* plan-tlbr */
@@ -218,6 +236,10 @@ li {
 }
 
 /* plan-tlbr-02 */
+#weeklist{
+  margin-top: 1rem;
+}
+
 .wkday-menu{
   padding: 0;
   background: #fafafa;
@@ -227,10 +249,6 @@ li {
   border: 1px solid #e9e9e9;
 }
 
-.id{
-  cursor: pointer;
-}
-
 #description{
   resize: none;
 }
@@ -238,4 +256,9 @@ li {
 /* plan-tlbr-03 */
 #tool-buttons{
   padding-top: 3rem;
+}
+
+#override-bootstrap #err-msg-bar{
+  padding-top: 15px;
+  color: red;
 }

@@ -48,7 +48,7 @@ $(document).ready(function () {
   $("#schedule").on("click", "button.scroll-down", function() { scrollDown(this, tasks, task, taskMaster); });
   
 /* plan-wksl-02 */
-  $("#schedule").on("click", "div.id", function() { prepInfo(this, tasks, task); });
+  $("#schedule").on("click", "div.filled", function() { prepInfo(this, tasks, task); });
 
 /* helps enable plan-tlbr-03 */
   $(".wkday").click(function() { setDay($(this).text(), task); });

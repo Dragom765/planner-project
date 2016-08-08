@@ -44,7 +44,7 @@
 * (nswb) Node Server for Webpage
 
   > (-list) multiple listeners (eventually)
-  > allow refresh to keep user in same ‘place’, not reset page to login
+  > (-stay) allow refresh to keep user in same ‘place’, not reset page to login
 
 * (rest) Node Server for RESTful API
 
