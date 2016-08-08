@@ -16,11 +16,7 @@
 
 3. Run 'npm install'.
 
-4. Create a file called 'mydb.env', and enter three variables: DB_HOST, DB_USER, and DB_PASS. These stand as your credentials for logging into your MySQL server. Format them each like so (minus the bullets, of course);
-
-   - `DB_HOST=`_your database host_ (ex: localhost)
-   - `DB_USER=`_your database username_ (ex: root)
-   - `DB_PASS=`_your database password_ (ex: password123)
+4. Edit the file called 'mydb.env', and enter three variables: DB_HOST, DB_USER, and DB_PASS. These stand as your credentials for logging into your MySQL server. You will need to delete everything after the equals signs. Quotations not allowed (for example, type just localhost, rather than 'localhost' or "localhost").
 
 .5 Execute `node mysql_con.js` in the command prompt.
 
