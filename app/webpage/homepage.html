@@ -15,77 +15,85 @@
     <script type="text/javascript" src="main.js"></script>
   </head>
   <body id="override-bootstrap">
+    <div class="top centered">
 <!-- lgin -->
-    <div class="top container-fluid" id="login">
-    
+      <div class="container-fluid" id="login">
+        <div class="row row-eq-height">
+          <div class="col-md-3 col-md-offset-5 front">
 <!-- lgin-user -->
-      <div class="row row-eq-height signin" id="username">
-        <div class="col-md-2 col-md-offset-5 front">  
-          <h3>Email:</h3>
-          <div class="level-3 input">
-            <input type="text" id="email" size=35>
-          </div>
-        </div>
-        <div class="col-md-1 front">
-          <div class="signin-divs1">
-            <div class="spacer"></div>
-            <div class="signin-div">
-              <button class="user-verify" id="log-email">Next</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-<!-- lgin-pswd -->
-      <div class="row row-eq-height signin" id="password">
-        <div class="col-md-2 col-md-offset-5 front">  
-          <h3>Password:</h3>
-          <div class="level-3 input">
-            <input type="password" id="pswd" size=35>
-          </div>
-        </div>
-        <div class="col-md-1 front">
-          <div class="signin-divs1">
-            <div class="spacer"></div>
-            <div class="signin-div">
-              <button class="user-verify" id="log-pswd">Login</button>
-              <button class="user-verify email-return">Back</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-<!-- lgin-npwd -->
-      <div class="row row-eq-height signin" id="sign-up">
-        <div class="col-md-3 col-md-offset-5 front">
-          <h3>Create Password:</h3>
-          <div class="row row-eq-height create">
-            <div class="col-md-9">
-              <h4>Enter Password:</h4>
-              <div class="level-3 input">
-                <input type="password" id="pswd-create" size=35>
-              </div>
-              <h4>Confirm Password:</h4>
-              <div class="level-3 input">
-                <input type="password" id="confirm" size=35>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="signin-divs2">
-                <div class="spacer"></div>
-                <div class="signin-div">
-                  <button class="user-verify" id="log-create">Sign Up</button>
-                  <button class="user-verify email-return">Back</button>
+            <div id="username">
+              <div class="row row-eq-height">
+                <div class="col-md-8">  
+                  <h3>Email:</h3>
+                  <div class="level-3 input">
+                    <input type="text" id="email" size=35>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="signin-divs1">
+                    <div class="spacer"></div>
+                    <div class="signin-div">
+                      <button class="user-verify" id="log-email">Next</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
       
-      <div class="row row-eq-height">
-        <div class="col-md-3 col-md-offset-5 front"  id="err-login-bar">
-          <p  id="err-login-bar"></p>
+<!-- lgin-pswd -->
+            <div id="password">
+              <div class="row row-eq-height">
+                <div class="col-md-8">  
+                  <h3>Password:</h3>
+                  <div class="level-3 input">
+                    <input type="password" id="pswd" size=35>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="signin-divs1">
+                    <div class="spacer"></div>
+                    <div class="signin-div">
+                      <button class="user-verify" id="log-pswd">Login</button>
+                      <button class="user-verify email-return">Back</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+<!-- lgin-npwd -->
+            <div id="sign-up">
+              <div class="row row-eq-height">
+                <div class="col-md-12">
+                  <h3>Create Password:</h3>
+                  <div class="row row-eq-height create">
+                    <div class="col-md-9">
+                      <h4 id="skinny">Enter Password:</h4>
+                      <div class="level-3 input">
+                        <input type="password" id="pswd-create" size=35>
+                      </div>
+                      <h4>Confirm Password:</h4>
+                      <div class="level-3 input">
+                        <input type="password" id="confirm" size=35>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="signin-divs2">
+                        <div class="spacer"></div>
+                        <div class="signin-div">
+                          <button class="user-verify" id="log-create">Sign Up</button>
+                          <button class="user-verify email-return">Back</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-12"  id="err-login-bar">
+              <p  id="err-login-bar"></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -128,11 +136,11 @@
               <input type="text" size=35 placeholder="Name of the task..." id="title">
             
               <h4>Description:</h4>
-              <textarea rows=4 cols=55 placeholder="Details about the task...." id="description"></textarea>
+              <textarea rows=4 cols=50 placeholder="Details about the task...." id="description"></textarea>
             </div>
           
 <!-- plan-tlbr-02 -->
-            <div>
+            <div id="weeklist">
               <button class="btn btn-primary dropdown-toggle div-caret" type="button" data-toggle="dropdown"><h5 id="wkday-select">Day of the week: <span class="caret"></span></h5></button>
               <ul class="dropdown-menu wkday-menu">
                 <li class="wkday">Sunday</li>

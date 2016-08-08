@@ -2,8 +2,9 @@
 function eValidate(user) {
   var email = $("#email");
   user.email = email.val();
-  var place = user.email.search("@");
-  if(user.email == "" || user.email == undefined || place <= 0) {
+  var place1 = user.email.indexOf("@",1);
+  var place2 = user.email.lastIndexOf(".")
+  if(user.email == "" || user.email == undefined || (place2 <= place1 || place2 == place1 + 1) || place1 == -1 || place2 == -1 || place2 != (user.email.length - 4) ) {
 // .search() throws -1 if not found, this makes sure '@' isn't missing or first.
     $("#err-login-bar").text("Please enter a valid email address.");
     $("#email").select();
@@ -133,6 +134,7 @@ var gotoEmail = function() {
   $("#pswd").val("");
   $("#pswd-create").val("");
   $("#confirm").val("");
+  $("#err-login-bar").text("");
   
   $("#password").hide();
   $("#sign-up").hide();

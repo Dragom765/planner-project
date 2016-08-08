@@ -4,8 +4,8 @@ $(document).ready(function () {
   var tasks = {};
   var user = {};
   
-    $("#week-scheduler").hide();
-    $(".top").hide();
+  $("#week-scheduler").hide();
+  $(".top").hide();
   checkUser(user, task, tasks);
   
 /* lgin-user-01, plan-head-01 */
@@ -21,9 +21,9 @@ $(document).ready(function () {
   $(".email-return").click(gotoEmail);
 
 /* plan-head-02-01 */
-  $("#pswd-change").click(togglePswdChange);
+  $("#pswd-change").click(enablePswdChange);
   
-  $("#cancelChange").click(togglePswdChange);
+  $("#cancelChange").click(disablePswdChange);
 
 //logging out
   $("#logout-user").click(function() { userOut(this); });
@@ -48,7 +48,7 @@ $(document).ready(function () {
   $("#schedule").on("click", "button.scroll-down", function() { scrollDown(this, tasks, task, taskMaster); });
   
 /* plan-wksl-02 */
-  $("#schedule").on("click", "div.id", function() { prepInfo(this, tasks, task); });
+  $("#schedule").on("click", "div.filled", function() { prepInfo(this, tasks, task); });
 
 /* helps enable plan-tlbr-03 */
   $(".wkday").click(function() { setDay($(this).text(), task); });

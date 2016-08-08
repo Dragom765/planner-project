@@ -5,6 +5,7 @@ var initiate = function(tasks, task, user, num) {
   task.title = '';
   task.description = '';
   task.weekday = '';
+  task.position = null;
   
   $("#title").val('');
   $("#description").val('');
@@ -41,9 +42,20 @@ var initiate = function(tasks, task, user, num) {
 }
 
 /* plan-head-02-01 */
-var togglePswdChange = function() {
+var enablePswdChange = function() {
   $("#tools").hide();
+  $("#check-user").hide();
+  $("#option-help").hide();
+  $("#err-msg-bar").text("");
   $("#newpswd").show();
+}
+
+var disablePswdChange = function() {
+  $("#tools").show();
+  $("#check-user").hide();
+  $("#option-help").hide();
+  $("#err-msg-bar").text("");
+  $("#newpswd").hide();
 }
 
 /* plan-head-02-01 */
@@ -101,6 +113,8 @@ var userOut = function(that) {
   
   $("#tools").hide();
   $("#check-user").show();
+  $("#option-help").hide();
+  $("#newpswd").hide();
 }
 
 /* plan-head-02-02 */
@@ -128,6 +142,8 @@ var action = function(user, task, tasks, initiate) {
   }
   else if(choice == "logout") {
     $("#check-user").hide();
+    $("#option-help").hide();
+    $("#err-msg-bar").text("");
     $("#tools").show();
     initiate(tasks, task, user, 0);
   } else
@@ -137,6 +153,8 @@ var action = function(user, task, tasks, initiate) {
 /* plan-head-02-02 */
 var negateAction = function() {
   $("#check-user").hide();
+  $("#option-help").hide();
+  $("#err-msg-bar").text("");
   $("#tools").show();
   
   $("#err-msg-bar").text("");
@@ -147,7 +165,7 @@ var helpText = function(task) {
   $("#option-help").toggle();
 }
 
-/* enables user cookie usage */
+/* nswb-stay, enables user cookie usage */
 var saveUser = function(user) {
   document.cookie = "emailuser="+user.email;
   document.cookie = "pswduser="+user.pswd;

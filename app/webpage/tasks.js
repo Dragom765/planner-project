@@ -3,7 +3,7 @@ var setDay = function(txt, task) {
   $("#wkday-select").text(txt+" ").append("<span class=\"caret\"></span>");
   
   if(txt == "Day of the week: ")
-    task.weekday = '';
+    task.weekday = "";
   else 
     task.weekday = txt;
 }
@@ -50,10 +50,12 @@ var prepInfo = function(that, tasks, task, taskMaster) {
     task.title = tasks[day][taskIndex].title;
     task.description = tasks[day][taskIndex].description;
     task.weekday = day;
+    task.position = taskIndex;
     
     showInfo(day, tasks[day][taskIndex]);
 }
 
+/* plan-wksl-01 */
 var taskMaster = {
   create: {
     get: {
@@ -75,6 +77,9 @@ var taskMaster = {
       
       /* plan-wksl-01-01 */
       makeDayTasks: function(user, tasks, presday, order) {
+        var now = new Date();
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      
         $.ajax({
           "method": "GET",
           "crossDomain": true,
@@ -89,14 +94,15 @@ var taskMaster = {
             }
             tasks[presday.day] = daytasks;
             tasks[presday.day].offset = 0;
-            taskMaster.create.makeDay(presday.day, presday.weekday, tasks, order);
+            taskMaster.create.makeDay(presday.day, presday.weekday, tasks, order, now, days);
           }
         });
       }
     },
     
     /* plan-wksl-01-02 */
-    makeDay: function(day, wkday, tasks, order) {
+    makeDay: function(day, wkday, tasks, order, now, days) {
+      
       var schedule = $("#schedule");
       schedule.append("<div class=\"week "+wkday+"\" id=\""+day+"\">"
           + "<div class=\"day\">"+day+"</div>"
@@ -106,8 +112,12 @@ var taskMaster = {
             + "<button type=\"button\" value=\""+day+"\" class=\"scroll-down btn btn-secondary btn-sm\" id=\"scroll-down-"+day+"\">&#x25BC</button>"
           + "</div>"
         + "</div>");
-      $("#"+day).css('order', order);
-    
+      $("#"+day).css("order", order);
+      
+      if(day == days[now.getDay()]) {
+        $("#"+day+" > .day").addClass("today");
+      }
+      
       var thisDay = $("."+day);
       var index;
       for(i=0; i < 10; i++) {
@@ -149,15 +159,6 @@ var taskMaster = {
                 else {
                   taskMaster.refresh.get.refreshDay(user, tasks, task.weekday);
           
-                  // resetting the fields against accidental miss-clicking
-                  task.id = null;
-                  task.title = '';
-                  task.description = '';
-                  task.weekday = '';
-                    
-                  $("#title").val('');
-                  $("#description").val('');
-                  $("#wkday-select").text("Day of the week:").append("<span class=\"caret\"></span>");
                   $("#err-msg-bar").text("");
                 }
               }
@@ -169,8 +170,9 @@ var taskMaster = {
         updateTask: function(task, tasks, user) {
           var titleBox = $("#title").val();
           var descBox = $("#description").val();
+          var surround = $("#"+task.weekday+"-task"+(task.position-tasks[task.weekday].offset)).parent();
           
-          if(task.id == null || task.title == '' || task.weekday == '')
+          if(task.id == null || task.title == "" || task.weekday == "")
             $("#err-msg-bar").text("Please make sure an existing task is selected, and a title is present");
           else {
             if(task.title == titleBox && task.description == descBox)
@@ -178,6 +180,8 @@ var taskMaster = {
             else if(titleBox == "")
               $("#err-msg-bar").text("You must add some kind of title before you continue.");
             else {
+              surround.addClass("chosen");
+              
               $.ajax({
                 "method": "PUT",
                 "crossDomain": true,
@@ -187,30 +191,38 @@ var taskMaster = {
                   "description": descBox
                 },
                 "success": function(data) {
-                  if(data.message != "Task updated")
+                  if(data.message != "Task updated") {
                     $("#err-msg-bar").text(data.message);
-                  else {
-                    taskMaster.refresh.get.refreshDay(user, tasks, task.weekday);
+                  } else {
                     $("#err-msg-bar").text("");
+                    task.description = descBox;
+                    taskMaster.refresh.get.refreshDay(user, tasks, task.weekday);
                   }
+                },
+                "complete": function() {
+                  surround.removeClass("chosen");
                 }
               });
+              
             }
           }
         },
         
         /* plan-tlbr-03 */
         killTask: function(task, tasks, user) {
+          var that;
           var titleBox = $("#title").val();
           var descBox = $("#description").val();
           var wkdaySelect = $("#wkday-select").text();
   
-          if(task.id == null || task.title == '' || task.weekday == '')
-            $("#err-msg-bar").text("Please select a task before deletion");
+          if(task.id == null || task.title == "" || task.weekday == "")
+            $("#err-msg-bar").text("Please select a task to delete.");
           else {
             if(task.title != titleBox || task.description != descBox || task.weekday != wkdaySelect)
-              $("#err-msg-bar").text("Task information has been edited. Please refresh task information to delete.");
+              $("#err-msg-bar").text("The task information has beem changed. Please update or refresh information before deleting the task.");
             else {
+              that = $("#"+task.weekday+"-task"+(task.position-tasks[task.weekday].offset));
+              
               $.ajax({
                 "method": "DELETE",
                 "crossDomain": true,
@@ -219,16 +231,21 @@ var taskMaster = {
                   if(data.message != "Task deleted")
                     $("#err-msg-bar").text(data.message);
                   else {
+                    if(tasks[task.weekday].offset == task.position)
+                      tasks[task.weekday].offset -= 10;
+                    
+                    that.text("").removeClass("filled");
                     taskMaster.refresh.get.refreshDay(user, tasks, task.weekday);
 
                   // resetting the fields against accidental miss-clicking
                     task.id = null;
-                    task.title = '';
-                    task.description = '';
-                    task.weekday = '';
+                    task.title = "";
+                    task.description = "";
+                    task.weekday = "";
+                    task.position = null;
                     
-                    $("#title").val('');
-                    $("#description").val('');
+                    $("#title").val("");
+                    $("#description").val("");
                     $("#wkday-select").text("Day of the week:").append("<span class=\"caret\"></span>");
                     $("#err-msg-bar").text("");
                   }
@@ -253,8 +270,9 @@ var taskMaster = {
                 daytasks[i] = {id: null, title: "", description: ""};
               }
             }
+            var keep = tasks[day].offset;
             tasks[day] = daytasks;
-            tasks[day].offset = 0;
+            tasks[day].offset = keep;
             taskMaster.refresh.refreshDayTasks(day, tasks);
           }
         });
@@ -282,15 +300,15 @@ var taskMaster = {
     /* plan-wksl-01-02 */
     fillTask: function(day, title, index, id) {
       var task = $("#"+day+"-task"+index);
-      var hasId = task.hasClass("id");
+      var hasId = task.hasClass("filled");
     
       task.text(title);
     
-      if(id != null && hasId == false)
-        task.addClass("id");
-      else if(id == null && hasId == true)
-        task.removeClass("id");
-      
+      if(id != null && hasId == false) {
+        task.addClass("filled");
+      } else if(id == null && hasId == true) {
+        task.removeClass("filled");
+      }
     }
   },
   

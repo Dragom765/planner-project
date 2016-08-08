@@ -130,9 +130,7 @@ router.route("/user/change")
     deletes.deleteUser(res, req, con);
   });
 
-
 // -----------------------------------------------------------------------------
-
 app.use("/api", router);
 
 app.listen(port);
