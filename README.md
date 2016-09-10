@@ -18,6 +18,8 @@
 
 4. Edit the file called 'mydb.env', and give values to the three variables, DB_HOST, DB_USER, and DB_PASS. These stand as your credentials for logging into your MySQL server. Note: you will need to delete everything after the equals signs first, and quotations are not allowed (for example, type just localhost, rather than 'localhost' or "localhost").
 
+5. __NEW Step:__ There's now three more variables in mydb.env, used for the database initiation. This is more for someone dealing with MySQL permissions and limiting client access; _if you're not, put the same credentials for both sets_. If you are, use these to give a different-/higher-permissioned account for making tables and the plan database upon startup if the system sees they're missing.
+
 5. Execute `node mysql_con.js` in the command prompt.
 
 6. In your web browser, navigate to [http://localhost:6143/api/](http://localhost:6143/api/ "To-Do Weekly List") to access the application.
