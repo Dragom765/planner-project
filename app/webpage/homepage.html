@@ -19,79 +19,81 @@
 <!-- lgin -->
       <div class="container-fluid" id="login">
         <div class="row row-eq-height">
-          <div class="col-md-3 col-md-offset-5 front">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-4 col-md-offset-4 front">
 <!-- lgin-user -->
-            <div id="username">
-              <div class="row row-eq-height">
-                <div class="col-md-8">  
-                  <h3>Email:</h3>
-                  <div class="level-3 input">
-                    <input type="text" id="email" size=35>
+              <div id="username">
+                <div class="row row-eq-height">
+                  <div class="col-md-8">  
+                    <h3>Email:</h3>
+                    <div class="level-3 input">
+                      <input type="text" class="in-log" id="email">
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="signin-divs1">
-                    <div class="spacer"></div>
-                    <div class="signin-div">
-                      <button class="user-verify" id="log-email">Next</button>
+                  <div class="col-md-4">
+                    <div class="signin-divs1">
+                      <div class="spacer"></div>
+                      <div class="signin-div">
+                        <button class="user-verify" id="log-email">Next</button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
       
 <!-- lgin-pswd -->
-            <div id="password">
-              <div class="row row-eq-height">
-                <div class="col-md-8">  
-                  <h3>Password:</h3>
-                  <div class="level-3 input">
-                    <input type="password" id="pswd" size=35>
+              <div id="password">
+                <div class="row row-eq-height">
+                  <div class="col-md-8">  
+                    <h3>Password:</h3>
+                    <div class="level-3 input">
+                      <input type="password" class="in-log" id="pswd" size=35>
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="signin-divs1">
-                    <div class="spacer"></div>
-                    <div class="signin-div">
-                      <button class="user-verify" id="log-pswd">Login</button>
-                      <button class="user-verify email-return">Back</button>
+                  <div class="col-md-4">
+                    <div class="signin-divs1">
+                      <div class="spacer"></div>
+                      <div class="signin-div">
+                        <button class="user-verify" id="log-pswd">Login</button>
+                        <button class="user-verify email-return">Back</button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 <!-- lgin-npwd -->
-            <div id="sign-up">
-              <div class="row row-eq-height">
-                <div class="col-md-12">
-                  <h3>Create Password:</h3>
-                  <div class="row row-eq-height create">
-                    <div class="col-md-9">
-                      <h4 id="skinny">Enter Password:</h4>
-                      <div class="level-3 input">
-                        <input type="password" id="pswd-create" size=35>
+              <div id="sign-up">
+                <div class="row row-eq-height">
+                  <div class="col-md-12">
+                    <h3>Create Password:</h3>
+                    <div class="row row-eq-height create">
+                      <div class="col-md-9">
+                        <h4 id="skinny">Enter Password:</h4>
+                        <div class="level-3 input">
+                          <input type="password" class="in-log" id="pswd-create" size=35>
+                        </div>
+                        <h4>Confirm Password:</h4>
+                        <div class="level-3 input">
+                          <input type="password" class="in-log" id="confirm" size=35>
+                        </div>
                       </div>
-                      <h4>Confirm Password:</h4>
-                      <div class="level-3 input">
-                        <input type="password" id="confirm" size=35>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="signin-divs2">
-                        <div class="spacer"></div>
-                        <div class="signin-div">
-                          <button class="user-verify" id="log-create">Sign Up</button>
-                          <button class="user-verify email-return">Back</button>
+                      <div class="col-md-3">
+                        <div class="signin-divs2">
+                          <div class="spacer"></div>
+                          <div class="signin-div">
+                            <button class="user-verify" id="log-create">Sign Up</button>
+                            <button class="user-verify email-return">Back</button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
             
-            <div class="col-md-12"  id="err-login-bar">
-              <p  id="err-login-bar"></p>
+              <div class="col-md-12"  id="err-login-bar">
+                <p  id="err-login-bar"></p>
+              </div>
             </div>
           </div>
         </div>
@@ -194,8 +196,8 @@
 <!-- plan-head-02-03 -->
           <div id="option-help">
             <p><b>Clicking:</b><br/>Click on a task title to see the title and description pop up in this side bar. You can then update or delete the event.</p>
-            <p><b>Add an event:</b><br/>Fill out the title and description fields, and then choose a day of the week from the dropdown 
-            menu underneath before pressing the add button.<br/>You should then see the event clearly in your schedule.</p>
+            <p><b>Edit an event:</b><br/>To update or delete, click on the desired task. Edit the content only if you wish to update the task. To add a task, simply fill in the title, add a description if you wish.
+            <br/>You should then see new or updated event clearly in your schedule, or not, after pressing the appropriate button.</p>
             <p><b>Other options:</b><br/>To delete your account or change your password, you will find the appropriate selections available in the same options
             menu that you found this help message in.</p>
           </div>

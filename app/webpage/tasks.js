@@ -65,7 +65,7 @@ var taskMaster = {
           $.ajax({
             "method": "GET",
             "crossDomain": true,
-            "url": "http://localhost:6143/api/week",
+            "url": "http://"+window.location.host+"/api/week",
             "success": function(week) {
               $.each(week, function(i, presday) {
                 taskMaster.create.get.makeDayTasks(user, tasks, presday, i);
@@ -83,7 +83,7 @@ var taskMaster = {
         $.ajax({
           "method": "GET",
           "crossDomain": true,
-          "url": "http://localhost:6143/api/wkday/tasks/"+user.id+"&"+presday.day,
+          "url": "http://"+window.location.host+"/api/wkday/tasks/"+user.id+"&"+presday.day,
           "success": function(daytasks) {
             var size = daytasks.length;
             if(size % 10 || size == 0) {
@@ -146,7 +146,7 @@ var taskMaster = {
             $.ajax({
               "method": "POST",
               "crossDomain": true,
-              "url": "http://localhost:6143/api/tasks/add",
+              "url": "http://"+window.location.host+"/api/tasks/add",
               "data": {
                 "user_id": user.id,
                 "day": task.weekday,
@@ -176,7 +176,7 @@ var taskMaster = {
             $("#err-msg-bar").text("Please make sure an existing task is selected, and a title is present");
           else {
             if(task.title == titleBox && task.description == descBox)
-              $("#err-msg-bar").text("Change the title or the description of the task; you cannot change the weekday of a task as of yet.");
+              $("#err-msg-bar").text("Change the title or the description of the task; you cannot change the weekday of a task.");
             else if(titleBox == "")
               $("#err-msg-bar").text("You must add some kind of title before you continue.");
             else {
@@ -185,7 +185,7 @@ var taskMaster = {
               $.ajax({
                 "method": "PUT",
                 "crossDomain": true,
-                "url": "http://localhost:6143/api/tasks/change/"+task.id,
+                "url": "http://"+window.location.host+"/api/tasks/change/"+task.id,
                 "data": {
                   "title": titleBox,
                   "description": descBox
@@ -201,6 +201,8 @@ var taskMaster = {
                 },
                 "complete": function() {
                   surround.removeClass("chosen");
+                  task.title = titleBox;
+                  task.description = descBox;
                 }
               });
               
@@ -222,16 +224,16 @@ var taskMaster = {
               $("#err-msg-bar").text("The task information has beem changed. Please update or refresh information before deleting the task.");
             else {
               that = $("#"+task.weekday+"-task"+(task.position-tasks[task.weekday].offset));
-              
+
               $.ajax({
                 "method": "DELETE",
                 "crossDomain": true,
-                "url": "http://localhost:6143/api/tasks/change/"+task.id,
+                "url": "http://"+window.location.host+"/api/tasks/change/"+task.id,
                 "success": function(data) {
                   if(data.message != "Task deleted")
                     $("#err-msg-bar").text(data.message);
                   else {
-                    if(tasks[task.weekday].offset == task.position)
+                    if(tasks[task.weekday].offset == task.position && task.position != 0)
                       tasks[task.weekday].offset -= 10;
                     
                     that.text("").removeClass("filled");
@@ -261,7 +263,7 @@ var taskMaster = {
         $.ajax({
           "method": "GET",
           "crossDomain": true,
-          "url": "http://localhost:6143/api/wkday/tasks/"+user.id+"&"+day,
+          "url": "http://"+window.location.host+"/api/wkday/tasks/"+user.id+"&"+day,
           "success": function(daytasks) {
             var size = daytasks.length;
             if(size % 10 || size == 0) {

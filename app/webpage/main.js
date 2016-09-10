@@ -89,7 +89,7 @@ var checkUser = function(user, task, tasks) {
       $.ajax({
         "method": "GET",
         "crossDomain": true,
-        "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
+        "url": "http://"+window.location.host+"/api/login/pswd/"+user.email+"&"+user.pswd,
         "success": function(data) {
           if(data != 1) {
             initiate(tasks, task, user, 0);

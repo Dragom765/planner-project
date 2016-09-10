@@ -16,7 +16,7 @@ function eValidate(user) {
   $.ajax({
     "method": "GET",
     "crossDomain": true,
-    "url": "http://localhost:6143/api/login/user/"+user.email,
+    "url": "http://"+window.location.host+"/api/login/user/"+user.email,
   /* -01 */
     "success": function(data) {
       if(data == 1) {
@@ -46,7 +46,7 @@ var pswdValidate = function(user, tasks) {
     $.ajax({
       "method": "GET",
       "crossDomain": true,
-      "url": "http://localhost:6143/api/login/pswd/"+user.email+"&"+user.pswd,
+      "url": "http://"+window.location.host+"/api/login/pswd/"+user.email+"&"+user.pswd,
       "success": function(data) {
         if(data != 1) {
           $("#err-login-bar").text("Password incorrect. Please try again.");
@@ -78,7 +78,7 @@ var signupValidate = function(user, tasks) {
     $.ajax({
       "method": "POST",
       "crossDomain": true,
-      "url": "http://localhost:6143/api/login/create-new",
+      "url": "http://"+window.location.host+"/api/login/create-new",
       "data": {
         "email": user.email,
         "pswd": user.pswd,
@@ -103,7 +103,7 @@ var solidifyUser = function(user, tasks) {
   $.ajax({
     "method": "GET",
     "crossDomain": true,
-    "url": "http://localhost:6143/api/solid/"+user.email+"&"+user.pswd,
+    "url": "http://"+window.location.host+"/api/solid/"+user.email+"&"+user.pswd,
     "success": function(data) {
       if(typeof data != "number") {
         $("#err-login-bar").text(data+"\nSomething went wrong. Please try again.");

@@ -83,7 +83,7 @@ var changePswd = function(user) {
     $.ajax({
       "method": "PUT",
       "crossDomain": true,
-      "url": "http://localhost:6143/api/user/change/",
+      "url": "http://"+window.location.host+"/api/user/change/",
       "data": {
         "id": user.id,
         "newpswd": user.pswd
@@ -125,7 +125,7 @@ var action = function(user, task, tasks, initiate) {
    $.ajax({
      "method": "DELETE",
      "crossDomain": true,
-     "url": "http://localhost:6143/api/user/change/",
+     "url": "http://"+window.location.host+"/api/user/change/",
      "data": {
        "id": user.id
      },

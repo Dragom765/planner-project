@@ -2,7 +2,6 @@
   position: relative;
   background: none;
   border: none;
-  border: none;
 }
 
 textarea, input{
@@ -68,6 +67,11 @@ textarea, input{
 /* lgin-user, lgin-pswd, lgin-npwd */
 .user-verify{
   position: relative;
+  width: 6rem;
+}
+
+.in-log{
+  width: 100%;
 }
 
 /* lgin-npwd */

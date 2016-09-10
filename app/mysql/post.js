@@ -11,10 +11,15 @@ module.exports = {
       if(err) {
         if(err.message.substring(0,12) == "ER_DUP_ENTRY")
           res.send({ message: "This email seems to have an account already. Please navigate back to the email entry field." });
-        else
+        else {
+    console.log("making user badly...");
           res.send(err);
-      } else
+        }
+      } else {
+        
+    console.log("making user...");
         res.send({ message: "Success"});
+      }
       return;
     });
   },
