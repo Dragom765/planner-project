@@ -3,7 +3,7 @@
 
 #### Site demo link: [http://104.236.105.200:6207/api/](http://104.236.105.200:6207/api/ "To-Do Weekly List")
 
-__*Notice:*__ MySQL has been chewing through RAM, and been shutting down the application after it runs out. The configuration file has been updated as of 9/11/2016, so ideally the problem will be fixed, but only time will tell. If you cannot connect to the address still, it means the solution hasn't fully been reached yet, and I am pursuing it currently.
+__*Notice:*__ Current efforts are being made to have an app demo accessible through a link. As of now, the application only remains up temporarily; there is a memory leak somewhere that I will be diagnosing, either in NODE.js or in MySQL, and it will take further inspection to locate which one and where it is.
 
 ##Things you will need:
 1. NODE.js downloaded on your computer
