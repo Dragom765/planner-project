@@ -1,7 +1,11 @@
 # planner-project
-### A week planner that stores user information in a database
+## A week planner that stores user information in a database
 
-####Things you will need:
+#### Site demo link: [http://104.236.105.200:6207/api/](http://104.236.105.200:6207/api/ "To-Do Weekly List")
+
+__*Notice:*__ MySQL has been chewing through RAM, and been shutting down the application after it runs out. The configuration file has been updated as of 9/11/2016, so ideally the problem will be fixed, but only time will tell. If you cannot connect to the address still, it means the solution hasn't fully been reached yet, and I am pursuing it currently.
+
+##Things you will need:
 1. NODE.js downloaded on your computer
 2. A running mysql server
    * The application will take care of creating the necessary tables
