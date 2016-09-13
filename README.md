@@ -3,7 +3,7 @@
 
 #### Site demo link: [http://104.236.105.200:6207/api/](http://104.236.105.200:6207/api/ "To-Do Weekly List")
 
-__*Notice:*__ Current efforts are being made to have an app demo accessible through a link. As of now, the application only remains up temporarily; there is a memory leak somewhere that I will be diagnosing, either in NODE.js or in MySQL, and it will take further inspection to locate which one and where it is.
+__*Notice:*__ Current efforts are being made to have an app demo accessible through the link. As of now, there's some memory leaking that needs to be addressed, possibly in the NODE or MySQL software.
 
 ##Things you will need:
 1. NODE.js downloaded on your computer
