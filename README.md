@@ -1,7 +1,11 @@
 # planner-project
-### A week planner that stores user information in a database
+## A week planner that stores user information in a database
 
-####Things you will need:
+#### Site demo link: [http://104.236.105.200:6207/api/](http://104.236.105.200:6207/api/ "To-Do Weekly List")
+
+__*Notice:*__ Current efforts are being made to have an app demo accessible through a link. As of now, the application only remains up temporarily; there is a memory leak somewhere that I will be diagnosing, either in NODE.js or in MySQL, and it will take further inspection to locate which one and where it is.
+
+##Things you will need:
 1. NODE.js downloaded on your computer
 2. A running mysql server
    * The application will take care of creating the necessary tables
@@ -17,6 +21,8 @@
 3. Run 'npm install' to install the necessary node.js packages to run the application.
 
 4. Edit the file called 'mydb.env', and give values to the three variables, DB_HOST, DB_USER, and DB_PASS. These stand as your credentials for logging into your MySQL server. Note: you will need to delete everything after the equals signs first, and quotations are not allowed (for example, type just localhost, rather than 'localhost' or "localhost").
+
+5. __NEW Step:__ There's now three more variables in mydb.env, used for the database initiation. They're named the same as the three mentioned above, but with an '\_INIT' extention on the ends. This is more for someone dealing with MySQL permissions and limiting client access; _if you're keeping things simple, put the same credentials for both sets_. If you are, use these to give a different-/higher-permissioned account for making tables and the plan database upon startup if the system sees they're missing.
 
 5. Execute `node mysql_con.js` in the command prompt.
 
