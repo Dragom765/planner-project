@@ -7,7 +7,7 @@ module.exports = {
     con.query("SELECT COUNT(*) AS occur FROM users WHERE email = ?;", email, function(err, count) {
       if(err)
         res.send(err.message);
-    
+
       res.json(count["0"].occur);
       return;
     });
@@ -39,7 +39,9 @@ module.exports = {
     con.query("SELECT id FROM users WHERE email = ? AND pswd = ?;", [email, pswd], function(err, num) {
       if(err)
         res.send(err.message);
-      
+      var date = new Date();
+
+      console.log(email+" logged in successfully from "+req.connection.remoteAddress+" at "+date.getHours()+":"+date.getMinutes()+" on "+(date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear()+".");
       res.json(num[0].id);
       return;
     });

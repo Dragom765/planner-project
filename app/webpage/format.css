@@ -38,7 +38,7 @@ textarea, input{
 
 /* these next four format the login buttons' layouts */
 .signin-divs1{
-  padding: .2%;
+  padding: 0%;
   height: 100%;
   width: 50%;
   display: flex;
@@ -46,7 +46,7 @@ textarea, input{
 }
 
 .signin-divs2{
-  padding: .2%;
+  padding: 0;
   height: 100%;
   width: 100%;
   display: flex;

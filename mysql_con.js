@@ -22,21 +22,21 @@ app.use(function(req, res, next) {                       // allow outside access
   return next();
 });
 
-var port = process.env.PORT || 6143;                     // set our port
+var port = process.env.PORT || 6207;                     // set our port
 
 var router = express.Router();              // get an instance of the express Router
 
 // middleware to use for all requests ------------------------------------------
-router.use(function(req, res, next) {
+//router.use(function(req, res, next) {
     // do logging
-	console.log('Something is happening.');
-	next(); // make sure we go to the next routes and don't stop here
-});
+  //console.log(req.connection.remoteAddress);
+  //next(); // make sure we go to the next routes and don't stop here
+//});
 
 /* nswb-conn */
 // accessing the webpage (GET http://localhost:6143/api) -----------------------
 router.get("/", function(req, res) {
-	res.sendFile(__dirname+"/app/webpage/homepage.html");
+  res.sendFile(__dirname+"/app/webpage/homepage.html");
 });
 
 router.get("/format.css", function(req, res) {

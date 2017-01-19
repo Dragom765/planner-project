@@ -1,14 +1,14 @@
 var mysql = require("mysql");
 require("dotenv").config({path: "mydb.env"}); 
 //this searches for a file in mysql_con.js's directory since it's called by it, not its own.
-
+/*
 var con = mysql.createConnection({
   host: process.env.DB_HOST_INIT,
   user: process.env.DB_USER_INIT,
   password: process.env.DB_PASS_INIT
 });
 
-/* rest-chek */
+// rest-chek
 con.query("CREATE DATABASE IF NOT EXISTS plan;", function(err) {
   if (err)
     throw err;
@@ -27,7 +27,7 @@ con.query("CREATE DATABASE IF NOT EXISTS plan;", function(err) {
           throw err;
       });
       
-/* rest-tabl */
+// rest-tabl
     con.query("CREATE TABLE IF NOT EXISTS tasks("
       + "id int NOT NULL AUTO_INCREMENT,"
       + "user_id int NOT NULL,"
@@ -84,11 +84,14 @@ con.query("CREATE DATABASE IF NOT EXISTS plan;", function(err) {
           function(err) {
             if(err)
               throw(err);
-            });
+          });
       }
     });
   });
+            
+            con.end();
 });
+*/
 
 /* rest-conn */
 var con2 = mysql.createConnection({
@@ -97,7 +100,10 @@ var con2 = mysql.createConnection({
   password: process.env.DB_PASS
 });
 
-con2.query("USE plan;");
+con2.query("USE plan;", function(err) {
+  if(err)
+    throw err;
+});
 /* end */
 
 module.exports = con2;
