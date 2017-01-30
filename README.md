@@ -1,18 +1,15 @@
 # planner-project
 ## A week planner that stores user information in a database
 
-#### Site demo link: [http://104.236.105.200:6207/api/](http://104.236.105.200:6207/api/ "To-Do Weekly List")
-
-__*Notice:*__ Current efforts are being made to have an app demo accessible through the link. As of now, there's some memory leaking that needs to be addressed, possibly in the NODE or MySQL software.
 
 ##Things you will need:
 1. NODE.js downloaded on your computer
 2. A running mysql server
    * The application will take care of creating the necessary tables
-   * **_Important_**: Should the format of the tables change in a later PR, since the only current check is that they exist and not if they have the correct columns and types, it may be necessary to manually delete the _plan_ database that is created in your MySQL server.
+   * **_Important_**: Should any of the created colums or rows be edited manually by the user in MySQL, the software doesn't have safeties to catch this as of yet.
 
 #### Using the application
-1. Download or clone the _Master_ branch, and unzip it if you downloaded.
+1. Download or clone the _Master_ branch. Unzip it if you downloaded.
 
 2. Navigate to the file system through the command prompt, after relocating the planner-project file if desired. A download's original path will have `/downloads/planner-project-master/planner-project-master/` for the correct file location.
 
@@ -28,4 +25,4 @@ __*Notice:*__ Current efforts are being made to have an app demo accessible thro
 
 6. In your web browser, navigate to [http://localhost:6143/api/](http://localhost:6143/api/ "To-Do Weekly List") to access the application.
 
- - *Additional Note:* this application was designed using Firefox, but currently, the formatting should be such that it works for most, if not all, browsers. Chrome was also used and approved by the designer. Should there be anything that looks like an error, or improper formatting, please feel free to comment on it here.
+ - *Additional Note:* this application was designed using Firefox, but currently, the formatting should be such that it works for most browsers. Chrome was also checked, it should format correctly. Please feel free to comment on any errors found that were missed in the last update.
