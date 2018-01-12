@@ -24,8 +24,8 @@ __*Notice:*__ Current efforts are being made to have an app demo accessible thro
 
 5. __NEW Step:__ There's now three more variables in mydb.env, used for the database initiation. They're named the same as the three mentioned above, but with an '\_INIT' extention on the ends. This is more for someone dealing with MySQL permissions and limiting client access; _if you're keeping things simple, put the same credentials for both sets_. If you are, use these to give a different-/higher-permissioned account for making tables and the plan database upon startup if the system sees they're missing.
 
-5. Execute `node mysql_con.js` in the command prompt.
+6. Execute `node mysql_con.js` in the command prompt.
 
-6. In your web browser, navigate to [http://localhost:6143/api/](http://localhost:6143/api/ "To-Do Weekly List") to access the application.
+7. In your web browser, navigate to [http://localhost:6143/api/](http://localhost:6143/api/ "To-Do Weekly List") to access the application.
 
- - *Additional Note:* this application was designed using Firefox, but currently, the formatting should be such that it works for most, if not all, browsers. Chrome was also used and approved by the designer. Should there be anything that looks like an error, or improper formatting, please feel free to comment on it here.
+ - *Additional Note:* this application was designed using Firefox, but currently, Chrome was also used and approved by the designer. Should there be anything that looks like an error, or improper formatting, please feel free to comment on it here.

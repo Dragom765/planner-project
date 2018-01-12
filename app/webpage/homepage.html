@@ -1,208 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>To-Do Weekly List</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.0/sjcl.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="http://getbootstrap.com.vn/examples/equal-height-columns/equal-height-columns.css" />
-    <link href="format.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="options-list.js"></script>
-    <script type="text/javascript" src="tasks.js"></script>
-    <script type="text/javascript" src="login.js"></script>
-    <script type="text/javascript" src="main.js"></script>
-  </head>
-  <body id="override-bootstrap">
+    <link href="static/format.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="static/options-list.js"></script>
+    <script type="text/javascript" src="static/tasks.js"></script>
+    <script type="text/javascript" src="static/login.js"></script>
+    <script type="text/javascript" src="static/main.js"></script>
+</head>
+
+<body id="override-bootstrap">
     <div class="top centered">
-<!-- lgin -->
-      <div class="container-fluid" id="login">
-        <div class="row row-eq-height">
-          <div class="col-md-8 col-md-offset-2">
-            <div class="col-md-4 col-md-offset-4 front">
-<!-- lgin-user -->
-              <div id="username">
-                <div class="row row-eq-height">
-                  <div class="col-md-8">  
-                    <h3>Email:</h3>
-                    <div class="level-3 input">
-                      <input type="text" class="in-log" id="email">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="signin-divs1">
-                      <div class="spacer"></div>
-                      <div class="signin-div">
-                        <button class="user-verify" id="log-email">Next</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-      
-<!-- lgin-pswd -->
-              <div id="password">
-                <div class="row row-eq-height">
-                  <div class="col-md-8">  
-                    <h3>Password:</h3>
-                    <div class="level-3 input">
-                      <input type="password" class="in-log" id="pswd" size=35>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="signin-divs1">
-                      <div class="spacer"></div>
-                      <div class="signin-div">
-                        <button class="user-verify" id="log-pswd">Login</button>
-                        <button class="user-verify email-return">Back</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-<!-- lgin-npwd -->
-              <div id="sign-up">
-                <div class="row row-eq-height">
-                  <div class="col-md-12">
-                    <h3>Create Password:</h3>
-                    <div class="row row-eq-height create">
-                      <div class="col-md-9">
-                        <h4 id="skinny">Enter Password:</h4>
-                        <div class="level-3 input">
-                          <input type="password" class="in-log" id="pswd-create" size=35>
+        <!-- lgin -->
+        <div class="container-fluid" id="login">
+            <div class="row row-eq-height">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-4 col-md-offset-4 front">
+                        <!-- lgin-user -->
+                        <div id="username">
+                            <div class="row row-eq-height">
+                                <div class="col-md-8">
+                                    <h3>Email:</h3>
+                                    <div class="level-3 input">
+                                        <input type="text" class="in-log" id="email">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="signin-divs1">
+                                        <div class="spacer"></div>
+                                        <div class="signin-div">
+                                            <button class="user-verify" id="log-email">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h4>Confirm Password:</h4>
-                        <div class="level-3 input">
-                          <input type="password" class="in-log" id="confirm" size=35>
+
+                        <!-- lgin-pswd -->
+                        <div id="password">
+                            <div class="row row-eq-height">
+                                <div class="col-md-8">
+                                    <h3>Password:</h3>
+                                    <div class="level-3 input">
+                                        <input type="password" class="in-log" id="pswd" size=35>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="signin-divs1">
+                                        <div class="spacer"></div>
+                                        <div class="signin-div">
+                                            <button class="user-verify" id="log-pswd">Login</button>
+                                            <button class="user-verify email-return">Back</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="signin-divs2">
-                          <div class="spacer"></div>
-                          <div class="signin-div">
-                            <button class="user-verify" id="log-create">Sign Up</button>
-                            <button class="user-verify email-return">Back</button>
-                          </div>
+                        <!-- lgin-npwd -->
+                        <div id="sign-up">
+                            <div class="row row-eq-height">
+                                <div class="col-md-12">
+                                    <h3>Create Password:</h3>
+                                    <div class="row row-eq-height create">
+                                        <div class="col-md-9">
+                                            <h4 id="skinny">Enter Password:</h4>
+                                            <div class="level-3 input">
+                                                <input type="password" class="in-log" id="pswd-create" size=35>
+                                            </div>
+                                            <h4>Confirm Password:</h4>
+                                            <div class="level-3 input">
+                                                <input type="password" class="in-log" id="confirm" size=35>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="signin-divs2">
+                                                <div class="spacer"></div>
+                                                <div class="signin-div">
+                                                    <button class="user-verify" id="log-create">Sign Up</button>
+                                                    <button class="user-verify email-return">Back</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
+
+                        <div class="col-md-12" id="err-login-bar">
+                            <p id="err-login-bar"></p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            
-              <div class="col-md-12"  id="err-login-bar">
-                <p  id="err-login-bar"></p>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    
-<!-- plan -->
+
+    <!-- plan -->
     <div class="container-fluid" id="week-scheduler">
-    
-<!-- plan-head -->
-      <div class="row row-eq-height" id="title-bar">
-        <div class="col-md-8 col-md-offset-2">
-<!-- plan-head-01 -->
-          <h1 id="header">[user]'s Tasklist</h1>
+
+        <!-- plan-head -->
+        <div class="row row-eq-height" id="title-bar">
+            <div class="col-md-8 col-md-offset-2">
+                <!-- plan-head-01 -->
+                <h1 id="header">[user]'s Tasklist</h1>
+            </div>
+            <!-- plan-head-02 -->
+            <div class="col-md-2">
+                <div class="dropdown" id="option-div">
+                    <button id="option-btn" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></button>
+                    <ul class="dropdown-menu">
+                        <li id="logout-user">
+                            <p>Logout</p>
+                        </li>
+                        <li id="pswd-change">
+                            <p>Change your password</p>
+                        </li>
+                        <li id="end-user">
+                            <p>Delete your account</p>
+                        </li>
+                        <li class="divider"></li>
+                        <li id="help">
+                            <p>Help</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-<!-- plan-head-02 -->
-        <div class="col-md-2">
-          <div class="dropdown" id="option-div">
-            <button id="option-btn" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></button>
-            <ul class="dropdown-menu">
-              <li id="logout-user"><p>Logout</p></li>
-              <li id="pswd-change"><p>Change your password</p></li>
-              <li id="end-user"><p>Delete your account</p></li>
-              <li class="divider"></li>
-              <li id="help"><p>Help</p></li>
-            </ul>
-          </div>
+
+        <!-- plan-wksl, plan-tlbr -->
+        <div class="row row-eq-height" id="body">
+            <!-- plan-wksl -->
+            <div class="col-md-9" id="schedule"></div>
+
+            <!-- plan-tlbr -->
+            <div class="col-md-3" id="tool-bar">
+                <div id="tools">
+                    <div>
+                        <!-- plan-tlbr-01 -->
+                        <h4>Title:</h4>
+                        <input type="text" size=35 placeholder="Name of the task..." id="title">
+
+                        <h4>Description:</h4>
+                        <textarea rows=4 cols=50 placeholder="Details about the task...." id="description"></textarea>
+                    </div>
+
+                    <!-- plan-tlbr-02 -->
+                    <div id="weeklist">
+                        <button class="btn btn-primary dropdown-toggle div-caret" type="button" data-toggle="dropdown"><h5 id="wkday-select">Day of the week: <span class="caret"></span></h5></button>
+                        <ul class="dropdown-menu wkday-menu">
+                            <li class="wkday">Sunday</li>
+                            <li class="wkday">Monday</li>
+                            <li class="wkday">Tuesday</li>
+                            <li class="wkday">Wednesday</li>
+                            <li class="wkday">Thursday</li>
+                            <li class="wkday">Friday</li>
+                            <li class="wkday">Saturday</li>
+                            <li class="wkday">Day of the week:</li>
+                        </ul>
+                    </div>
+
+                    <!-- plan-tlbr-03 -->
+                    <div id="tool-buttons">
+                        <button id="task-add">Add</button>
+                        <button id="task-update">Update</button>
+                        <button id="task-delete">Delete</button>
+                    </div>
+                </div>
+
+                <!-- plan-head-02-01 -->
+                <div id="newpswd">
+                    <div id="pswdchange">
+                        <h4>Old Password:</h4>
+                        <input type="password" size=35 id="oldpswd">
+
+                        <h4>New Password:</h4>
+                        <input type="password" size=35 id="new-change">
+
+                        <h4>Confirm Password:</h4>
+                        <input type="password" size=35 id="newconfirm">
+                    </div>
+
+                    <div id="change-button">
+                        <button id="setPassword">Submit</button>
+                        <button id="cancelChange">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="check-user">
+                    <h4>Are you sure you want to <span id="filler"></span>?</h4>
+                    <button id="yes-action">Yes</button>
+                    <button id="no-action">No</button>
+                </div>
+
+                <div>
+                    <p id="err-msg-bar"></p>
+                </div>
+
+                <!-- plan-head-02-03 -->
+                <div id="option-help">
+                    <p><b>Clicking:</b><br/>Click on a task title to see the title and description pop up in this side bar. You can then update or delete the event.</p>
+                    <p><b>Edit an event:</b><br/>To update or delete, click on the desired task. Edit the content only if you wish to update the task. To add a task, simply fill in the title, add a description if you wish.
+                        <br/>You should then see new or updated event clearly in your schedule, or not, after pressing the appropriate button.</p>
+                    <p><b>Other options:</b><br/>To delete your account or change your password, you will find the appropriate selections available in the same options menu that you found this help message in.</p>
+                </div>
+            </div>
         </div>
-      </div>
-     
-<!-- plan-wksl, plan-tlbr -->
-      <div class="row row-eq-height" id="body">
-<!-- plan-wksl -->
-        <div class="col-md-9" id="schedule"></div>
-        
-<!-- plan-tlbr -->
-        <div class="col-md-3" id="tool-bar">
-          <div id="tools">
-            <div>
-<!-- plan-tlbr-01 -->
-              <h4>Title:</h4>
-              <input type="text" size=35 placeholder="Name of the task..." id="title">
-            
-              <h4>Description:</h4>
-              <textarea rows=4 cols=50 placeholder="Details about the task...." id="description"></textarea>
-            </div>
-          
-<!-- plan-tlbr-02 -->
-            <div id="weeklist">
-              <button class="btn btn-primary dropdown-toggle div-caret" type="button" data-toggle="dropdown"><h5 id="wkday-select">Day of the week: <span class="caret"></span></h5></button>
-              <ul class="dropdown-menu wkday-menu">
-                <li class="wkday">Sunday</li>
-                <li class="wkday">Monday</li>
-                <li class="wkday">Tuesday</li>
-                <li class="wkday">Wednesday</li>
-                <li class="wkday">Thursday</li>
-                <li class="wkday">Friday</li>
-                <li class="wkday">Saturday</li>
-                <li class="wkday">Day of the week:</li>
-              </ul>
-            </div>
-          
-<!-- plan-tlbr-03 -->
-            <div id="tool-buttons">
-              <button id="task-add">Add</button>
-              <button id="task-update">Update</button>
-              <button id="task-delete">Delete</button>
-            </div>
-          </div>
-            
-<!-- plan-head-02-01 -->
-          <div id="newpswd">
-            <div id="pswdchange">
-              <h4>Old Password:</h4>
-              <input type="password" size=35 id="oldpswd">
-            
-              <h4>New Password:</h4>
-              <input type="password" size=35 id="new-change">
-            
-              <h4>Confirm Password:</h4>
-              <input type="password" size=35 id="newconfirm">
-            </div>
-            
-            <div id="change-button">
-              <button id="setPassword">Submit</button>
-              <button id="cancelChange">Cancel</button>
-            </div>
-          </div>
-          
-          <div id="check-user">
-            <h4>Are you sure you want to <span id="filler"></span>?</h4>
-            <button id="yes-action">Yes</button>
-            <button id="no-action">No</button>
-          </div>
-          
-          <div>
-            <p id="err-msg-bar"></p>
-          </div>
-          
-<!-- plan-head-02-03 -->
-          <div id="option-help">
-            <p><b>Clicking:</b><br/>Click on a task title to see the title and description pop up in this side bar. You can then update or delete the event.</p>
-            <p><b>Edit an event:</b><br/>To update or delete, click on the desired task. Edit the content only if you wish to update the task. To add a task, simply fill in the title, add a description if you wish.
-            <br/>You should then see new or updated event clearly in your schedule, or not, after pressing the appropriate button.</p>
-            <p><b>Other options:</b><br/>To delete your account or change your password, you will find the appropriate selections available in the same options
-            menu that you found this help message in.</p>
-          </div>
-        </div>
-      </div>
     </div>
-  </body>
+</body>
+
 </html>
