@@ -8,6 +8,8 @@ var posts = require("./app/mysql/post.js");
 var deletes = require("./app/mysql/delete.js");
 var puts = require("./app/mysql/put.js");
 
+// http://www.sqlitetutorial.net/sqlite-nodejs/
+
 /* rest-conn, rest-chek */
 var con = require("./app/mysql/connect.js");
 /* end */
@@ -15,7 +17,7 @@ var con = require("./app/mysql/connect.js");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(function(req, res, next) { // allow outside access
+app.use(function(req, res, next) { // request, response, next
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
     res.header("Access-Control-Allow-Headers", "Content-Type, cache-control");
@@ -29,7 +31,7 @@ var router = express.Router(); // get an instance of the express Router
 // middleware to use for all requests ------------------------------------------
 router.use(function(req, res, next) {
     // do logging
-
+    console.log("Server in use");
     next(); // make sure we go to the next routes and don't stop here
 });
 
