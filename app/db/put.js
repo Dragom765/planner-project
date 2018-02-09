@@ -5,7 +5,7 @@ module.exports = {
         var title = req.body.title;
         var desc = req.body.description;
 
-        db.query("UPDATE tasks SET title = ?, description = ? WHERE id = ?", [title, desc, id], function(err) {
+        db.run("UPDATE tasks SET title = ?, description = ? WHERE id = ?", [title, desc, id], function(err) {
             if (err)
                 res.send(err);
             else
@@ -19,7 +19,7 @@ module.exports = {
         var id = req.body.id;
         var newpswd = crypto.createHash("md5").update(req.body.newpswd).digest("hex");
 
-        db.query("UPDATE users SET pswd = ? WHERE id = ?", [newpswd, id], function(err) {
+        db.run("UPDATE users SET pswd = ? WHERE id = ?", [newpswd, id], function(err) {
             if (err) {
                 res.send(err);
             } else

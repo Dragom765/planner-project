@@ -7,12 +7,13 @@ module.exports = {
         /* -02 */
         var email = req.body.email;
 
-        db.query("INSERT INTO users(email, pswd) VALUES (?,?);", [email, pswd], function(err) {
+        db.run("INSERT INTO users(email, pswd) VALUES (?,?);", [email, pswd], function(err) {
             if (err) {
                 if (err.message.substring(0, 12) == "ER_DUP_ENTRY")
                     res.send({ message: "This email seems to have an account already. Please navigate back to the email entry field." });
                 else {
                     console.log("making user badly...");
+                    console.log(err)
                     res.send(err);
                 }
             } else {
@@ -31,7 +32,7 @@ module.exports = {
         var title = req.body.title;
         var desc = req.body.description;
 
-        db.query("INSERT INTO tasks(user_id, day, title, description) VALUES (?, ?, ?, ?);", [user_id, day, title, desc], function(err) {
+        db.run("INSERT INTO tasks(user_id, day, title, description) VALUES (?, ?, ?, ?);", [user_id, day, title, desc], function(err) {
             if (err)
                 res.send(err);
             else

@@ -36,7 +36,7 @@ module.exports = {
         /* -02 */
         var email = req.params.email;
 
-        db.query("SELECT id FROM users WHERE email = ? AND pswd = ?;", [email, pswd], function(err, num) {
+        db.all("SELECT id FROM users WHERE email = ? AND pswd = ?;", [email, pswd], function(err, num) {
             if (err)
                 res.send(err.message);
 
@@ -47,7 +47,7 @@ module.exports = {
 
     //made a default week table, just has week day names, and if they're a weekend or weekday
     getWeek: function(res, req, db) {
-        db.query("SELECT day, weekday FROM week ORDER BY ordr;", function(err, week) {
+        db.all("SELECT day, weekday FROM week ORDER BY ordr;", function(err, week) {
             if (err)
                 res.send(err.message);
             res.json(week);
@@ -60,7 +60,7 @@ module.exports = {
         var user_id = req.params.user_id;
         var day = req.params.day;
 
-        db.query("SELECT id, title, description FROM tasks WHERE user_id = ? AND day = ?;", [user_id, day], function(err, taskDay) {
+        db.all("SELECT id, title, description FROM tasks WHERE user_id = ? AND day = ?;", [user_id, day], function(err, taskDay) {
             if (err)
                 res.send(err.message);
 
