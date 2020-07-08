@@ -1,6 +1,8 @@
 # planner-project
+### This was my primary introduction to Full Stack development, and also my template for the first Software Saturdays curriculum a few years later
 ## A week planner that stores user information in a database
 
+## Installing:
 
 ##Things you will need:
 1. NODE.js downloaded on your computer
